@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class StartController: UIViewController {
     private lazy var collectionView: UICollectionView = {
@@ -34,6 +35,8 @@ class StartController: UIViewController {
 
     @objc func addTapped(_ sender:UIViewController!) {
         print("TAPPED!");
+        registerLocal()
+        scheduleLocal()
     }
 
 
@@ -84,5 +87,43 @@ extension StartController: UICollectionViewDelegate, UICollectionViewDataSource,
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width - 32, height: 80)
+    }
+    
+    @objc func registerLocal() {
+        let center = UNUserNotificationCenter.current()
+        
+        center.requestAuthorization(options: [.alert, .badge, .sound]){(granted, error) in
+            if granted {
+                print("good")
+            } else {
+                print("bad")
+            }
+        }
+    }
+    
+    @objc func scheduleLocal() {
+//        let center = UNUserNotificationCenter.current()
+//
+//        var dateComponents = DateComponents()
+//        dateComponents.hour = 21
+//        dateComponents.minute = 25
+////        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//
+//        let content = UNMutableNotificationContent()
+//        content.title = "My first alert"
+//        content.body = "get up now you lazy bastard!!!"
+//        content.categoryIdentifier = "myIdentifier"
+//        content.userInfo = ["Id": 7]
+////        content.sound = UNNotificationSound.default
+//
+//        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+//        center.add(request)
+        for index in 1...10 {
+            UIScreen.main.brightness = CGFloat(Double(index) * 0.1)
+            print(Double(index) * 0.1)
+            sleep(1)
+        }
+        
     }
 }

@@ -8,6 +8,7 @@
 import UIKit
 
 class ClockCell: UICollectionViewCell {
+    
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false

@@ -24,17 +24,12 @@ class StartViewModel {
     }
 
     init() {
-//        clocks = DecodeHelper.load("Clocks.json")
         getData()
     }
 
     func loadFile(mainPath: URL, subPath: URL){
         if fm.fileExists(atPath: subPath.path){
             decodeData(pathName: subPath)
-
-            if clocks.isEmpty{
-                decodeData(pathName: mainPath)
-            }
 
         }else{
             decodeData(pathName: mainPath)

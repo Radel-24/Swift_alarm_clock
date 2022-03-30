@@ -17,9 +17,8 @@
 		BD3BF27B27EB754200E28212 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD3BF27A27EB754200E28212 /* Assets.xcassets */; };
 		BD3BF27E27EB754200E28212 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD3BF27C27EB754200E28212 /* LaunchScreen.storyboard */; };
 		BD3BF28927EB77E900E28212 /* ClockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF28827EB77E900E28212 /* ClockCell.swift */; };
-		BD3BF29227EB9BB300E28212 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF28D27EB9BB300E28212 /* Model.swift */; };
+		BD3BF29227EB9BB300E28212 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF28D27EB9BB300E28212 /* Clock.swift */; };
 		BD3BF29327EB9BB300E28212 /* Clocks.json in Resources */ = {isa = PBXBuildFile; fileRef = BD3BF28E27EB9BB300E28212 /* Clocks.json */; };
-		BD3BF29427EB9BB300E28212 /* DecodeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF28F27EB9BB300E28212 /* DecodeHelper.swift */; };
 		BD3BF29927EB9BCE00E28212 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF29827EB9BCE00E28212 /* StartViewModel.swift */; };
 		BD3BF29C27EB9D0500E28212 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF29B27EB9D0500E28212 /* Array+Extension.swift */; };
 		BD3BF2A227EBA3D000E28212 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF2A127EBA3D000E28212 /* UIView+Extensions.swift */; };
@@ -38,9 +37,8 @@
 		BD3BF27D27EB754200E28212 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BD3BF27F27EB754200E28212 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD3BF28827EB77E900E28212 /* ClockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockCell.swift; sourceTree = "<group>"; };
-		BD3BF28D27EB9BB300E28212 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		BD3BF28D27EB9BB300E28212 /* Clock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
 		BD3BF28E27EB9BB300E28212 /* Clocks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Clocks.json; sourceTree = "<group>"; };
-		BD3BF28F27EB9BB300E28212 /* DecodeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodeHelper.swift; sourceTree = "<group>"; };
 		BD3BF29827EB9BCE00E28212 /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
 		BD3BF29B27EB9D0500E28212 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		BD3BF2A127EBA3D000E28212 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
@@ -100,8 +98,7 @@
 		BD3BF29627EB9BB900E28212 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				BD3BF28F27EB9BB300E28212 /* DecodeHelper.swift */,
-				BD3BF28D27EB9BB300E28212 /* Model.swift */,
+				BD3BF28D27EB9BB300E28212 /* Clock.swift */,
 				BD3BF28E27EB9BB300E28212 /* Clocks.json */,
 			);
 			path = Data;
@@ -210,7 +207,7 @@
 				0B4C005427F4CC3400421A92 /* ClockController.swift in Sources */,
 				BD3BF29927EB9BCE00E28212 /* StartViewModel.swift in Sources */,
 				BD3BF2A227EBA3D000E28212 /* UIView+Extensions.swift in Sources */,
-				BD3BF29227EB9BB300E28212 /* Model.swift in Sources */,
+				BD3BF29227EB9BB300E28212 /* Clock.swift in Sources */,
 				BD3BF27627EB754100E28212 /* StartViewController.swift in Sources */,
 				BD3BF27227EB754100E28212 /* AppDelegate.swift in Sources */,
 				BD3BF27427EB754100E28212 /* SceneDelegate.swift in Sources */,
@@ -218,7 +215,6 @@
 				BD3BF29C27EB9D0500E28212 /* Array+Extension.swift in Sources */,
 				BD3BF28927EB77E900E28212 /* ClockCell.swift in Sources */,
 				BD1C881827EDBA8F005A8A58 /* UIStackView+Extension.swift in Sources */,
-				BD3BF29427EB9BB300E28212 /* DecodeHelper.swift in Sources */,
 				08E34AA127F489670003FC1A /* ClockViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
