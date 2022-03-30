@@ -27,13 +27,16 @@ extension UIColor {
     }
     
     static var sit_PrimaryLight: UIColor {
-        return UIColor(hexString: "#7b2c82")
+//        return UIColor(hexString: "#7b2c82")
+        return UIColor(hexString: "#000000")
     }
     static var sit_Primary: UIColor {
-        return UIColor(hexString: "#791f82")
+//        return UIColor(hexString: "#791f82")
+        return UIColor(hexString: "#000000")
     }
     
     static var sit_Inactive: UIColor {
-        return UIColor(hexString: "#545454")
+//        return UIColor(hexString: "#545454")
+        return UIColor(hexString: "#000000")
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08E34A9D27F489330003FC1A /* ClockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E34A9C27F489330003FC1A /* ClockController.swift */; };
+		08E34AA127F489670003FC1A /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E34AA027F489670003FC1A /* ClockViewModel.swift */; };
 		BD1C881827EDBA8F005A8A58 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1C881727EDBA8F005A8A58 /* UIStackView+Extension.swift */; };
 		BD1C882127EDCFDB005A8A58 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1C882027EDCFDB005A8A58 /* UIColor+Extension.swift */; };
 		BD3BF27227EB754100E28212 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF27127EB754100E28212 /* AppDelegate.swift */; };
@@ -26,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08E34A9C27F489330003FC1A /* ClockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockController.swift; sourceTree = "<group>"; };
+		08E34AA027F489670003FC1A /* ClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		BD1C881727EDBA8F005A8A58 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		BD1C882027EDCFDB005A8A58 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		BD3BF26E27EB754100E28212 /* techstack-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "techstack-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +61,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08E34A9B27F488BB0003FC1A /* ClockDetail */ = {
+			isa = PBXGroup;
+			children = (
+				08E34A9C27F489330003FC1A /* ClockController.swift */,
+				08E34AA027F489670003FC1A /* ClockViewModel.swift */,
+			);
+			path = ClockDetail;
+			sourceTree = "<group>";
+		};
 		BD3BF26527EB754100E28212 = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +89,7 @@
 		BD3BF27027EB754100E28212 /* techstack-swift */ = {
 			isa = PBXGroup;
 			children = (
+				08E34A9B27F488BB0003FC1A /* ClockDetail */,
 				BD97B7E727F0B61100EC2692 /* Application */,
 				BD97B7E227F0B5EE00EC2692 /* Start */,
 				BD97B7E427F0B5FD00EC2692 /* ClockDetail */,
@@ -220,6 +234,7 @@
 				BD1C881827EDBA8F005A8A58 /* UIStackView+Extension.swift in Sources */,
 				BD81166C27ECB3A0000745FC /* ClockDetailViewModel.swift in Sources */,
 				BD3BF29427EB9BB300E28212 /* DecodeHelper.swift in Sources */,
+				08E34AA127F489670003FC1A /* ClockViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

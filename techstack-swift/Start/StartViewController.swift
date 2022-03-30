@@ -19,13 +19,24 @@ class StartController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupCollectionView()
-        
+
         navigationController?.navigationBar.prefersLargeTitles = true
-        title = "LightClock"
+        title = "LightAlarmClock"
         view.backgroundColor = .lightGray
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        let btnAdd = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
+        btnAdd.tintColor = .black
+        navigationItem.rightBarButtonItem = btnAdd
     }
+
+    @objc func addTapped(_ sender:UIViewController!) {
+        print("TAPPED!");
+    }
+
+
 
     private func setupCollectionView() {
         collectionView.register(ClockCell.self, forCellWithReuseIdentifier: "ClockCell")
@@ -34,9 +45,9 @@ class StartController: UIViewController {
         collectionView.backgroundColor = .lightGray
         collectionView.alwaysBounceVertical = true
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        
+
         view.addSubview(collectionView)
-        
+
         NSLayoutConstraint.activate([
             collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -54,22 +65,22 @@ extension StartController: UICollectionViewDelegate, UICollectionViewDataSource,
         cell.configureWith(clock)
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return clocks.count
     }
-    
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let clock = viewModel.itemAt(indexPath.item) else { return }
         let controller = ClockDetailController(viewModel: ClockDetailViewModel(clock: clock))
         navigationController?.pushViewController(controller, animated: true)
 //        present(controller, animated: true, completion: nil)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width - 32, height: 80)
     }
