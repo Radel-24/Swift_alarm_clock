@@ -76,7 +76,8 @@ extension StartController: UICollectionViewDelegate, UICollectionViewDataSource,
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let clock = viewModel.itemAt(indexPath.item) else { return }
-        let controller = ClockDetailController(viewModel: ClockDetailViewModel(clock: clock))
+        let controller = ClockController(viewModel: ClockViewModel(clock: clock))
+        
         navigationController?.pushViewController(controller, animated: true)
 //        present(controller, animated: true, completion: nil)
     }
