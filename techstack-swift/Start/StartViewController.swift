@@ -23,15 +23,15 @@ class StartController: UIViewController {
         setupCollectionView()
         
         navigationController?.navigationBar.prefersLargeTitles = true
-        title = "techstack"
-        view.backgroundColor = .white
+        title = "LightClock"
+        view.backgroundColor = .lightGray
     }
 
     private func setupCollectionView() {
-        collectionView.register(TechnologyCell.self, forCellWithReuseIdentifier: "TechnologyCell")
+        collectionView.register(ClockCell.self, forCellWithReuseIdentifier: "ClockCell")
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .lightGray
         collectionView.alwaysBounceVertical = true
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         
@@ -49,14 +49,14 @@ class StartController: UIViewController {
 extension StartController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TechnologyCell", for: indexPath) as? TechnologyCell,
-            let technology = viewModel.itemAt(indexPath.item) else { return UICollectionViewCell() }
-        cell.configureWith(technology)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClockCell", for: indexPath) as? ClockCell,
+            let clock = viewModel.itemAt(indexPath.item) else { return UICollectionViewCell() }
+        cell.configureWith(clock)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.numberOfItems
+        return clocks.count
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -64,9 +64,10 @@ extension StartController: UICollectionViewDelegate, UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let technology = viewModel.itemAt(indexPath.item) else { return }
-        let controller = TechnologyDetailController(viewModel: TechnologyDetailViewModel(technology: technology))
+        guard let clock = viewModel.itemAt(indexPath.item) else { return }
+        let controller = ClockDetailController(viewModel: ClockDetailViewModel(clock: clock))
         navigationController?.pushViewController(controller, animated: true)
+//        present(controller, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

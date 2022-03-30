@@ -9,32 +9,25 @@
 /* Begin PBXBuildFile section */
 		BD1C881827EDBA8F005A8A58 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1C881727EDBA8F005A8A58 /* UIStackView+Extension.swift */; };
 		BD1C882127EDCFDB005A8A58 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1C882027EDCFDB005A8A58 /* UIColor+Extension.swift */; };
-		BD1C882427EDFAE9005A8A58 /* UserDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1C882327EDFAE9005A8A58 /* UserDetailController.swift */; };
-		BD1C882727EDFB6C005A8A58 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1C882627EDFB6C005A8A58 /* UserViewModel.swift */; };
 		BD3BF27227EB754100E28212 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF27127EB754100E28212 /* AppDelegate.swift */; };
 		BD3BF27427EB754100E28212 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF27327EB754100E28212 /* SceneDelegate.swift */; };
 		BD3BF27627EB754100E28212 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF27527EB754100E28212 /* StartViewController.swift */; };
 		BD3BF27B27EB754200E28212 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD3BF27A27EB754200E28212 /* Assets.xcassets */; };
 		BD3BF27E27EB754200E28212 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD3BF27C27EB754200E28212 /* LaunchScreen.storyboard */; };
-		BD3BF28927EB77E900E28212 /* TechnologyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF28827EB77E900E28212 /* TechnologyCell.swift */; };
-		BD3BF29027EB9BB300E28212 /* StackOverflow.json in Resources */ = {isa = PBXBuildFile; fileRef = BD3BF28B27EB9BB300E28212 /* StackOverflow.json */; };
-		BD3BF29127EB9BB300E28212 /* User.json in Resources */ = {isa = PBXBuildFile; fileRef = BD3BF28C27EB9BB300E28212 /* User.json */; };
+		BD3BF28927EB77E900E28212 /* ClockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF28827EB77E900E28212 /* ClockCell.swift */; };
 		BD3BF29227EB9BB300E28212 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF28D27EB9BB300E28212 /* Model.swift */; };
-		BD3BF29327EB9BB300E28212 /* Technology.json in Resources */ = {isa = PBXBuildFile; fileRef = BD3BF28E27EB9BB300E28212 /* Technology.json */; };
+		BD3BF29327EB9BB300E28212 /* Clocks.json in Resources */ = {isa = PBXBuildFile; fileRef = BD3BF28E27EB9BB300E28212 /* Clocks.json */; };
 		BD3BF29427EB9BB300E28212 /* DecodeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF28F27EB9BB300E28212 /* DecodeHelper.swift */; };
 		BD3BF29927EB9BCE00E28212 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF29827EB9BCE00E28212 /* StartViewModel.swift */; };
 		BD3BF29C27EB9D0500E28212 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF29B27EB9D0500E28212 /* Array+Extension.swift */; };
 		BD3BF2A227EBA3D000E28212 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF2A127EBA3D000E28212 /* UIView+Extensions.swift */; };
-		BD81166927ECB36D000745FC /* TechnologyDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD81166827ECB36D000745FC /* TechnologyDetailController.swift */; };
-		BD81166C27ECB3A0000745FC /* TechnologyDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD81166B27ECB3A0000745FC /* TechnologyDetailViewModel.swift */; };
-		BD81167027ECC07D000745FC /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD81166F27ECC07D000745FC /* UserCell.swift */; };
+		BD81166927ECB36D000745FC /* ClockDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD81166827ECB36D000745FC /* ClockDetailController.swift */; };
+		BD81166C27ECB3A0000745FC /* ClockDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD81166B27ECB3A0000745FC /* ClockDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BD1C881727EDBA8F005A8A58 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		BD1C882027EDCFDB005A8A58 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
-		BD1C882327EDFAE9005A8A58 /* UserDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailController.swift; sourceTree = "<group>"; };
-		BD1C882627EDFB6C005A8A58 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		BD3BF26E27EB754100E28212 /* techstack-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "techstack-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD3BF27127EB754100E28212 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD3BF27327EB754100E28212 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,18 +35,15 @@
 		BD3BF27A27EB754200E28212 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD3BF27D27EB754200E28212 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BD3BF27F27EB754200E28212 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BD3BF28827EB77E900E28212 /* TechnologyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnologyCell.swift; sourceTree = "<group>"; };
-		BD3BF28B27EB9BB300E28212 /* StackOverflow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StackOverflow.json; sourceTree = "<group>"; };
-		BD3BF28C27EB9BB300E28212 /* User.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = User.json; sourceTree = "<group>"; };
+		BD3BF28827EB77E900E28212 /* ClockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockCell.swift; sourceTree = "<group>"; };
 		BD3BF28D27EB9BB300E28212 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		BD3BF28E27EB9BB300E28212 /* Technology.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Technology.json; sourceTree = "<group>"; };
+		BD3BF28E27EB9BB300E28212 /* Clocks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Clocks.json; sourceTree = "<group>"; };
 		BD3BF28F27EB9BB300E28212 /* DecodeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodeHelper.swift; sourceTree = "<group>"; };
 		BD3BF29827EB9BCE00E28212 /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
 		BD3BF29B27EB9D0500E28212 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		BD3BF2A127EBA3D000E28212 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
-		BD81166827ECB36D000745FC /* TechnologyDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnologyDetailController.swift; sourceTree = "<group>"; };
-		BD81166B27ECB3A0000745FC /* TechnologyDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnologyDetailViewModel.swift; sourceTree = "<group>"; };
-		BD81166F27ECC07D000745FC /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		BD81166827ECB36D000745FC /* ClockDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockDetailController.swift; sourceTree = "<group>"; };
+		BD81166B27ECB3A0000745FC /* ClockDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,8 +78,7 @@
 			children = (
 				BD97B7E727F0B61100EC2692 /* Application */,
 				BD97B7E227F0B5EE00EC2692 /* Start */,
-				BD97B7E427F0B5FD00EC2692 /* TechnologyDetail */,
-				BD97B7E527F0B60800EC2692 /* UserDetail */,
+				BD97B7E427F0B5FD00EC2692 /* ClockDetail */,
 				BD3BF29F27EB9D1400E28212 /* Extensions */,
 				BD3BF29627EB9BB900E28212 /* Data */,
 				BD3BF27A27EB754200E28212 /* Assets.xcassets */,
@@ -104,9 +93,7 @@
 			children = (
 				BD3BF28F27EB9BB300E28212 /* DecodeHelper.swift */,
 				BD3BF28D27EB9BB300E28212 /* Model.swift */,
-				BD3BF28B27EB9BB300E28212 /* StackOverflow.json */,
-				BD3BF28E27EB9BB300E28212 /* Technology.json */,
-				BD3BF28C27EB9BB300E28212 /* User.json */,
+				BD3BF28E27EB9BB300E28212 /* Clocks.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -127,28 +114,18 @@
 			children = (
 				BD3BF27527EB754100E28212 /* StartViewController.swift */,
 				BD3BF29827EB9BCE00E28212 /* StartViewModel.swift */,
-				BD3BF28827EB77E900E28212 /* TechnologyCell.swift */,
+				BD3BF28827EB77E900E28212 /* ClockCell.swift */,
 			);
 			path = Start;
 			sourceTree = "<group>";
 		};
-		BD97B7E427F0B5FD00EC2692 /* TechnologyDetail */ = {
+		BD97B7E427F0B5FD00EC2692 /* ClockDetail */ = {
 			isa = PBXGroup;
 			children = (
-				BD81166827ECB36D000745FC /* TechnologyDetailController.swift */,
-				BD81166B27ECB3A0000745FC /* TechnologyDetailViewModel.swift */,
+				BD81166827ECB36D000745FC /* ClockDetailController.swift */,
+				BD81166B27ECB3A0000745FC /* ClockDetailViewModel.swift */,
 			);
-			path = TechnologyDetail;
-			sourceTree = "<group>";
-		};
-		BD97B7E527F0B60800EC2692 /* UserDetail */ = {
-			isa = PBXGroup;
-			children = (
-				BD1C882327EDFAE9005A8A58 /* UserDetailController.swift */,
-				BD1C882627EDFB6C005A8A58 /* UserViewModel.swift */,
-				BD81166F27ECC07D000745FC /* UserCell.swift */,
-			);
-			path = UserDetail;
+			path = ClockDetail;
 			sourceTree = "<group>";
 		};
 		BD97B7E727F0B61100EC2692 /* Application */ = {
@@ -217,10 +194,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD3BF29127EB9BB300E28212 /* User.json in Resources */,
-				BD3BF29327EB9BB300E28212 /* Technology.json in Resources */,
+				BD3BF29327EB9BB300E28212 /* Clocks.json in Resources */,
 				BD3BF27E27EB754200E28212 /* LaunchScreen.storyboard in Resources */,
-				BD3BF29027EB9BB300E28212 /* StackOverflow.json in Resources */,
 				BD3BF27B27EB754200E28212 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -235,18 +210,15 @@
 				BD3BF29927EB9BCE00E28212 /* StartViewModel.swift in Sources */,
 				BD3BF2A227EBA3D000E28212 /* UIView+Extensions.swift in Sources */,
 				BD3BF29227EB9BB300E28212 /* Model.swift in Sources */,
-				BD1C882427EDFAE9005A8A58 /* UserDetailController.swift in Sources */,
 				BD3BF27627EB754100E28212 /* StartViewController.swift in Sources */,
-				BD81166927ECB36D000745FC /* TechnologyDetailController.swift in Sources */,
+				BD81166927ECB36D000745FC /* ClockDetailController.swift in Sources */,
 				BD3BF27227EB754100E28212 /* AppDelegate.swift in Sources */,
 				BD3BF27427EB754100E28212 /* SceneDelegate.swift in Sources */,
 				BD1C882127EDCFDB005A8A58 /* UIColor+Extension.swift in Sources */,
-				BD1C882727EDFB6C005A8A58 /* UserViewModel.swift in Sources */,
 				BD3BF29C27EB9D0500E28212 /* Array+Extension.swift in Sources */,
-				BD81167027ECC07D000745FC /* UserCell.swift in Sources */,
-				BD3BF28927EB77E900E28212 /* TechnologyCell.swift in Sources */,
+				BD3BF28927EB77E900E28212 /* ClockCell.swift in Sources */,
 				BD1C881827EDBA8F005A8A58 /* UIStackView+Extension.swift in Sources */,
-				BD81166C27ECB3A0000745FC /* TechnologyDetailViewModel.swift in Sources */,
+				BD81166C27ECB3A0000745FC /* ClockDetailViewModel.swift in Sources */,
 				BD3BF29427EB9BB300E28212 /* DecodeHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

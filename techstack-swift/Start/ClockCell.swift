@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TechnologyCell: UICollectionViewCell {
+class ClockCell: UICollectionViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -15,13 +15,7 @@ class TechnologyCell: UICollectionViewCell {
         label.textColor = .white
         return label
     }()
-    private let capableOfLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = .lightGray
-        return label
-    }()
+
     private let chevronImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -30,9 +24,6 @@ class TechnologyCell: UICollectionViewCell {
         return imageView
     }()
     
-    func textFor(_ humansCapableOfCount: Int) -> String {
-        return humansCapableOfCount > 1 ? "\(humansCapableOfCount) humans are capable of" : "\(humansCapableOfCount) human is capable of"
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,7 +42,6 @@ class TechnologyCell: UICollectionViewCell {
         
         addSubviews([
             nameLabel,
-            capableOfLabel,
             chevronImageView
         ])
         
@@ -60,10 +50,6 @@ class TechnologyCell: UICollectionViewCell {
             nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             nameLabel.rightAnchor.constraint(equalTo: chevronImageView.leftAnchor),
             
-            capableOfLabel.leftAnchor.constraint(equalTo: nameLabel.leftAnchor),
-            capableOfLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
-            capableOfLabel.rightAnchor.constraint(equalTo: nameLabel.rightAnchor),
-            
             chevronImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
             chevronImageView.widthAnchor.constraint(equalToConstant: 10),
             chevronImageView.heightAnchor.constraint(equalToConstant: 20),
@@ -71,11 +57,8 @@ class TechnologyCell: UICollectionViewCell {
         ])
     }
     
-    func configureWith(_ technology: Technology, capableOfHidden: Bool = false, chevronHidden: Bool = false) {
-        nameLabel.text = technology.name
-        capableOfLabel.text = textFor(technology.numberOfCapableHumans ?? 0)
-        capableOfLabel.isHidden = capableOfHidden
+    func configureWith(_ clock: Clock, capableOfHidden: Bool = false, chevronHidden: Bool = false) {
+        nameLabel.text = clock.name
         chevronImageView.isHidden = chevronHidden
-//        chevronImageView.isHidden = technology.numberOfCapableHumans == 0
     }
 }
