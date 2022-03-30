@@ -34,10 +34,39 @@ class StartController: UIViewController {
 
     @objc func addTapped(_ sender:UIViewController!) {
         print("TAPPED!");
+        alertMessage()
+        addClock()
+        saveClocks()
+    }
+    
+    func alertMessage() {
+        let alertController:UIAlertController = UIAlertController(title: "Added", message: "New Alarm", preferredStyle: UIAlertController.Style.alert)
+        let alertAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:nil)
+        alertController.addAction(alertAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func addClock() {
+        var newID = 0
+        if (clocks.count > 0) {
+            newID = clocks[clocks.count - 1].id + 1
+        }
+        clocks.append(techstack_swift.Clock(id: newID, name: "Alarm", daysOfWeek: [0]))
+    }
+    
+    func saveClocks() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            let JsonData = try encoder.encode(clocks)
+            try JsonData.write(to: subUrl!)
+            collectionView.reloadData()
+        } catch {
+            print("error: saveClocks failed")
+        }
     }
 
-
-
+    
     private func setupCollectionView() {
         collectionView.register(ClockCell.self, forCellWithReuseIdentifier: "ClockCell")
         collectionView.delegate = self

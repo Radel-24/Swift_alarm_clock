@@ -32,6 +32,22 @@ class ClockCell: UICollectionViewCell {
         switchDemo.setOn(false, animated: true)
         return switchDemo
     }()
+    
+    private let deleteButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("X", for: .normal)
+        button.setTitleColor(.red, for: .normal)
+        return button
+    }()
+    
+    // brauche hier id um aus dem clocks array die richtige cell zu löschen
+    // --> selbe logik wie bei StartViewController in "addTapped" function (line: 35)
+    @objc func deleteAlarm(_ sender:UIButton)
+    {
+        
+        print("DELETE ME")
+    }
 
 
     @objc func switchStateDidChange(_ sender:UISwitch!)
@@ -51,10 +67,7 @@ class ClockCell: UICollectionViewCell {
 //        print(defaults.bool(forKey: "Monday"))
 //        print(defaults.bool(forKey: "Tuesday"))
     }
-
-//    func textFor(_ humansCapableOfCount: Int) -> String {
-//        return humansCapableOfCount > 1 ? "\(humansCapableOfCount) humans are capable of" : "\(humansCapableOfCount) human is capable of"
-//    }
+    
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,6 +82,8 @@ class ClockCell: UICollectionViewCell {
 
     private func setupView() {
         switchView.addTarget(self, action: #selector(switchStateDidChange(_:)), for: .valueChanged)
+        deleteButton.addTarget(self, action: #selector(deleteAlarm(_:)), for: .touchUpInside)
+
 
         layer.cornerRadius = 10
         backgroundColor = .sit_PrimaryLight
@@ -76,7 +91,8 @@ class ClockCell: UICollectionViewCell {
         addSubviews([
             nameLabel,
             chevronImageView,
-            switchView
+            switchView,
+            deleteButton
         ])
 
         NSLayoutConstraint.activate([
@@ -90,7 +106,10 @@ class ClockCell: UICollectionViewCell {
             chevronImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
 
             switchView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            switchView.rightAnchor.constraint(equalTo: chevronImageView.leftAnchor, constant: -16)
+            switchView.rightAnchor.constraint(equalTo: chevronImageView.leftAnchor, constant: -16),
+            
+            deleteButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            deleteButton.rightAnchor.constraint(equalTo: switchView.leftAnchor, constant: -16)
         ])
     }
 
