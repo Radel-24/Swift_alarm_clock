@@ -1,0 +1,42 @@
+[
+    {
+        "id":0,
+        "name":"Swift",
+        "numberOfCapableHumans": 1
+    },
+    {
+        "id":1,
+        "name":"SwiftUI",
+        "numberOfCapableHumans": 1
+    },
+    {
+        "id":2,
+        "name":"Java",
+        "numberOfCapableHumans": 3
+    },
+    {
+        "id":3,
+        "name":"Kotlin",
+        "numberOfCapableHumans": 3
+    },
+    {
+        "id":4,
+        "name":"GO",
+        "numberOfCapableHumans": 3
+    },
+    {
+        "id":5,
+        "name":"C++",
+        "numberOfCapableHumans": 0
+    },
+    {
+        "id":6,
+        "name":"C",
+        "numberOfCapableHumans": 0
+    },
+    {
+        "id":7,
+        "name":"C#",
+        "numberOfCapableHumans": 0
+    }
+]
