@@ -8,19 +8,19 @@
 import Foundation
 
 class StartViewModel {
-    var technologies: [Technology]?
+    var technologies: [Clock]?
     
     var numberOfItems: Int {
         technologies?.count ?? 0
     }
     
-    func itemAt(_ index: Int) -> Technology? {
+    func itemAt(_ index: Int) -> Clock? {
         guard let item = technologies?.safeRef(index) else { return nil }
         return item
     }
     
     init() {
-        technologies = DecodeHelper.load("Technology.json")
+        technologies = DecodeHelper.load("Clock.json")
     }
     
 }

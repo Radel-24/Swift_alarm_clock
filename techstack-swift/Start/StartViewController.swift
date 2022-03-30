@@ -23,15 +23,26 @@ class StartController: UIViewController {
         setupCollectionView()
         
         navigationController?.navigationBar.prefersLargeTitles = true
-        title = "techstack"
-        view.backgroundColor = .white
+        title = "LightAlarmClock"
+        view.backgroundColor = .lightGray
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        let btnAdd = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
+        btnAdd.tintColor = .black
+        navigationItem.rightBarButtonItem = btnAdd
     }
+    
+    @objc func addTapped(_ sender:UIViewController!) {
+        print("TAPPED!");
+    }
+
+    
 
     private func setupCollectionView() {
         collectionView.register(TechnologyCell.self, forCellWithReuseIdentifier: "TechnologyCell")
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .lightGray
         collectionView.alwaysBounceVertical = true
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         
@@ -65,7 +76,8 @@ extension StartController: UICollectionViewDelegate, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let technology = viewModel.itemAt(indexPath.item) else { return }
-        let controller = TechnologyDetailController(viewModel: TechnologyDetailViewModel(technology: technology))
+//        let controller = TechnologyDetailController(viewModel: TechnologyDetailViewModel(technology: technology))
+        let controller = ClockController(viewModel: ClockViewModel(technology: technology))
         navigationController?.pushViewController(controller, animated: true)
     }
     

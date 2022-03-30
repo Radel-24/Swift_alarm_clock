@@ -7,10 +7,9 @@
 
 import Foundation
 
-struct Technology: Codable, Identifiable, Hashable {
+struct Clock: Codable, Identifiable, Hashable {
     var id: Int
     var name: String
-    var numberOfCapableHumans: Int?
 }
 
 struct User: Codable, Identifiable {
@@ -19,7 +18,7 @@ struct User: Codable, Identifiable {
     var age: Int
     var startedAt: String
     var email: String
-    var technologies: [Technology]
+    var technologies: [Clock]
 }
 
 struct StackOverFlowItem: Codable, Identifiable, Hashable {

@@ -22,7 +22,7 @@ class UserViewModel {
         user.startedAt
     }
     
-    var technologies: [Technology] {
+    var technologies: [Clock] {
         user.technologies
     }
     
@@ -34,7 +34,7 @@ class UserViewModel {
         self.user = user
     }
     
-    func itemAt(_ index: Int) -> Technology? {
+    func itemAt(_ index: Int) -> Clock? {
         guard let item = user.technologies.safeRef(index) else { return nil }
         return item
     }

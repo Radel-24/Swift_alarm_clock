@@ -1,13 +1,13 @@
 //
-//  File.swift
+//  ClockViewModel.swift
 //  techstack-swift
 //
-//  Created by Marcus Hopp on 24.03.22.
+//  Created by Alexander Kurz on 3/30/22.
 //
 
 import Foundation
 
-class TechnologyDetailViewModel {
+class ClockViewModel {
     private let technology: Clock
     private let usersWithTechnology: [User]
     
