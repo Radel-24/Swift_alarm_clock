@@ -57,6 +57,7 @@ class ClockCell: UICollectionViewCell {
 //        return humansCapableOfCount > 1 ? "\(humansCapableOfCount) humans are capable of" : "\(humansCapableOfCount) human is capable of"
 //    }
 
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
 

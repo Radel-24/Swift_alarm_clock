@@ -19,7 +19,7 @@ class ClockController: UIViewController {
        let label = UILabel()
         label.text = "Alarm"
         label.translatesAutoresizingMaskIntoConstraints = false
-        return label;
+        return label
     }()
     
     private let timePicker: UIDatePicker = {

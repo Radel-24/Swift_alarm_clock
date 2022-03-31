@@ -7,8 +7,12 @@
 
 import UIKit
 import UserNotifications
+import AVFoundation
 
 class StartController: UIViewController {
+    
+    let alert = Bundle.main.loadNibNamed("Alert", owner: self, options: nil)?.last as! UIView
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -32,11 +36,51 @@ class StartController: UIViewController {
         btnAdd.tintColor = .black
         navigationItem.rightBarButtonItem = btnAdd
     }
+    
+    func toggleTorch(on: Bool) {
+        guard let device = AVCaptureDevice.default(for: .video) else { return }
+        
+        if device.hasTorch {
+            do {
+                try device.lockForConfiguration()
+                
+                if on == true {
+                    device.torchMode = .on
+                } else {
+                    device.torchMode = .off
+                }
+                device.unlockForConfiguration()
+            } catch {
+                print("torch went wrong")
+            }
+        }
+    }
+    
 
     @objc func addTapped(_ sender:UIViewController!) {
         print("TAPPED!");
+        
+//        toggleTorch(on: true)
+        
+        
+//        MyLocalNotificationBuilder()
+//            .setActions()
+//            .setCategory()
+//            .setContent()
+//            .build()
+        
         registerLocal()
-        scheduleLocal()
+        sleep(5)
+        print("alert!")
+//        showAlert()
+        scheduleLocal(time: 5)
+        scheduleLocal(time: 10)
+        scheduleLocal(time: 15)
+        scheduleLocal(time: 20)
+        scheduleLocal(time: 25)
+//
+//
+//        removeAlert()
     }
 
 
@@ -57,6 +101,17 @@ class StartController: UIViewController {
             collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    func showAlert() {
+        let windows = UIApplication.shared.windows
+        let lastWindow = windows.last
+        alert.frame = UIScreen.main.bounds
+        lastWindow?.addSubview(alert)
+    }
+    
+    func removeAlert() {
+        alert.removeFromSuperview()
     }
 }
 
@@ -101,29 +156,36 @@ extension StartController: UICollectionViewDelegate, UICollectionViewDataSource,
         }
     }
     
-    @objc func scheduleLocal() {
-//        let center = UNUserNotificationCenter.current()
-//
-//        var dateComponents = DateComponents()
-//        dateComponents.hour = 21
-//        dateComponents.minute = 25
-////        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-//
-//        let content = UNMutableNotificationContent()
-//        content.title = "My first alert"
-//        content.body = "get up now you lazy bastard!!!"
-//        content.categoryIdentifier = "myIdentifier"
-//        content.userInfo = ["Id": 7]
-////        content.sound = UNNotificationSound.default
-//
-//        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-//        center.add(request)
-        for index in 1...10 {
-            UIScreen.main.brightness = CGFloat(Double(index) * 0.1)
-            print(Double(index) * 0.1)
-            sleep(1)
-        }
+    @objc func scheduleLocal(time: Double) {
+        
+        let test = UNNotificationCen
+
+        let center = UNUserNotificationCenter.current()
+
+        var dateComponents = DateComponents()
+        dateComponents.hour = 21
+        dateComponents.minute = 25
+//        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: time, repeats: false)
+
+        let content = UNMutableNotificationContent()
+        content.title = "My first alert"
+        content.body = "get up now you lazy bastard!!!"
+        content.categoryIdentifier = "myIdentifier"
+        content.userInfo = ["Id": 7]
+//        content.sound = UNNotificationSound.default
+
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        center.add(request)
+//        for index in 1...10 {
+//            UIScreen.main.brightness = CGFloat(Double(index) * 0.1)
+//            print(Double(index) * 0.1)
+//            sleep(1)
+//        }
         
     }
+    
+  
 }
+
+
