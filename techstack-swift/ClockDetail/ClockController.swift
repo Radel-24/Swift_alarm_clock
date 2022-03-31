@@ -82,6 +82,16 @@ class ClockController: UIViewController {
         return button
     }()
     
+    private let datesButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("select dates", for: .normal)
+        button.addTarget(self, action: #selector(datesButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    private let calendar: Calendar
+    
     @objc func tappedInternDelete(_ sender:UIButton!) {
         print("tappedInternDelete! (doesnt do anything)")
 
@@ -93,6 +103,20 @@ class ClockController: UIViewController {
     @objc func saveButtonPressed() {
         clocks[viewModel.clockId].name = nameTextField.text!
         writeToFile(location: subUrl!)
+    }
+    
+    @objc func datesButtonPressed() {
+        let today = Date(timeIntervalSinceNow: 0)
+        let pickerController = CalendarPickerViewController(
+            baseDate: today,
+          selectedDateChanged: { [weak self] date in
+          guard let self = self else { return }
+
+//          self.item.date = date
+//          self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
+          })
+
+        present(pickerController, animated: true, completion: nil)
     }
 //
 //    func alertMessage() {
@@ -146,6 +170,7 @@ class ClockController: UIViewController {
         nameTextField.text = clocks[viewModel.clockId].name
         title = clocks[viewModel.clockId].name
         setupView()
+
     }
     
     private func setupView() {
@@ -167,7 +192,8 @@ class ClockController: UIViewController {
             datePickerTo,
             internDeleteButton,
             saveButton,
-            nameTextField
+            nameTextField,
+            datesButton
         ])
     
         
@@ -214,7 +240,10 @@ class ClockController: UIViewController {
             nameTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -64),
             
             saveButton.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10),
-            saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            datesButton.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 10),
+            datesButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
 
         ])
     }

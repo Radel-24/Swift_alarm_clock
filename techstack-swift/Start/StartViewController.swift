@@ -8,7 +8,16 @@
 import UIKit
 import UserNotifications
 
+class StartViewController: UIViewController {
+    var startController = StartController()
+    
+    func responseToUserAction() {
+        self.present(self.startController, animated: true)
+    }
+}
+
 class StartController: UIViewController {
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -36,6 +45,7 @@ class StartController: UIViewController {
         let btnEdit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
         btnEdit.tintColor = .black
         navigationItem.leftBarButtonItem = btnEdit
+        collectionView.reloadData()
     }
 
     @objc func addTapped(_ sender:UIViewController!) {
@@ -116,7 +126,7 @@ extension StartController: UICollectionViewDelegate, UICollectionViewDataSource,
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let clock = viewModel.itemAt(indexPath.item) else { return }
-        let controller = ClockController(viewModel: ClockViewModel(clock: clock))
+        let controller = ClockController(viewModel: ClockViewModel(clock: clock, collectionView: collectionView))
 
         navigationController?.pushViewController(controller, animated: true)
 //        present(controller, animated: true, completion: nil)
