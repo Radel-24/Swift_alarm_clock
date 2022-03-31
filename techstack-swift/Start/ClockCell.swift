@@ -33,6 +33,43 @@ class ClockCell: UICollectionViewCell {
         switchDemo.setOn(false, animated: true)
         return switchDemo
     }()
+    
+    private let deleteButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("X", for: .normal)
+        button.setTitleColor(.red, for: .normal)
+        return button
+    }()
+    
+//    private var viewModel: ClockViewModel
+    // brauche hier id um aus dem clocks array die richtige cell zu löschen
+    // --> selbe logik wie bei StartViewController in "addTapped" function (line: 35)
+    
+    private var clockID : Int?
+    
+    @objc func deleteAlarm(_ sender:UIButton)
+    {
+        print("deleteAlarm (doesnt do anything)")
+//        print("before deletion:")
+//        print(clocks.count)
+//        let toBeDeleted = clocks.first(where: {$0.id == clockID!}) ?? nil
+//        if (toBeDeleted != nil) {
+//            clocks.remove(at: clocks.firstIndex(of: toBeDeleted!)!)
+//        }
+//        print("\nafter deletion:")
+//        print(clocks.count)
+//        do {
+//            let encoder = JSONEncoder()
+//            encoder.outputFormatting = .prettyPrinted
+//            let JsonData = try encoder.encode(clocks)
+//            try JsonData.write(to: subUrl!)
+////            let viewController = StartController()
+//            super.StartController.reloaderrr()
+//        } catch {
+//            print("error: saveClocks failed")
+//        }
+    }
 
 
     @objc func switchStateDidChange(_ sender:UISwitch!)
@@ -52,12 +89,10 @@ class ClockCell: UICollectionViewCell {
 //        print(defaults.bool(forKey: "Monday"))
 //        print(defaults.bool(forKey: "Tuesday"))
     }
-
-//    func textFor(_ humansCapableOfCount: Int) -> String {
-//        return humansCapableOfCount > 1 ? "\(humansCapableOfCount) humans are capable of" : "\(humansCapableOfCount) human is capable of"
-//    }
+    
 
     override init(frame: CGRect) {
+        
         super.init(frame: frame)
 
         setupView()
@@ -70,6 +105,9 @@ class ClockCell: UICollectionViewCell {
 
     private func setupView() {
         switchView.addTarget(self, action: #selector(switchStateDidChange(_:)), for: .valueChanged)
+        deleteButton.addTarget(self, action: #selector(deleteAlarm(_:)), for: .touchUpInside)
+        
+
 
         layer.cornerRadius = 10
         backgroundColor = .sit_PrimaryLight
@@ -77,7 +115,8 @@ class ClockCell: UICollectionViewCell {
         addSubviews([
             nameLabel,
             chevronImageView,
-            switchView
+            switchView,
+            deleteButton
         ])
 
         NSLayoutConstraint.activate([
@@ -91,12 +130,16 @@ class ClockCell: UICollectionViewCell {
             chevronImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
 
             switchView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            switchView.rightAnchor.constraint(equalTo: chevronImageView.leftAnchor, constant: -16)
+            switchView.rightAnchor.constraint(equalTo: chevronImageView.leftAnchor, constant: -16),
+            
+            deleteButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            deleteButton.rightAnchor.constraint(equalTo: switchView.leftAnchor, constant: -16)
         ])
     }
 
     func configureWith(_ clock: Clock, capableOfHidden: Bool = false, chevronHidden: Bool = false) {
         nameLabel.text = clock.name
+        clockID = clock.id
         chevronImageView.isHidden = chevronHidden
     }
 }

@@ -28,15 +28,52 @@ class StartController: UIViewController {
         view.backgroundColor = .lightGray
         navigationController?.navigationBar.barStyle = .default
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+
         let btnAdd = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
         btnAdd.tintColor = .black
         navigationItem.rightBarButtonItem = btnAdd
+
+        let btnEdit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
+        btnEdit.tintColor = .black
+        navigationItem.leftBarButtonItem = btnEdit
     }
 
     @objc func addTapped(_ sender:UIViewController!) {
-        print("TAPPED!");
-        registerLocal()
-        scheduleLocal()
+        print("addTapped!");
+        alertMessage()
+        addClock()
+        saveClocks()
+    }
+
+    @objc func editTapped(_ sender:UIViewController!) {
+        print("editTapped!");
+    }
+
+    func alertMessage() {
+        let alertController:UIAlertController = UIAlertController(title: "Added", message: "New Alarm", preferredStyle: UIAlertController.Style.alert)
+        let alertAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:nil)
+        alertController.addAction(alertAction)
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func addClock() {
+        var newID = 0
+        if (clocks.count > 0) {
+            newID = clocks[clocks.count - 1].id + 1
+        }
+        clocks.append(techstack_swift.Clock(id: newID, name: "Alarm", daysOfWeek: [0]))
+    }
+
+    func saveClocks() {
+        do {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            let JsonData = try encoder.encode(clocks)
+            try JsonData.write(to: subUrl!)
+            collectionView.reloadData()
+        } catch {
+            print("error: saveClocks failed")
+        }
     }
 
 
@@ -80,7 +117,7 @@ extension StartController: UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let clock = viewModel.itemAt(indexPath.item) else { return }
         let controller = ClockController(viewModel: ClockViewModel(clock: clock))
-        
+
         navigationController?.pushViewController(controller, animated: true)
 //        present(controller, animated: true, completion: nil)
     }
@@ -88,10 +125,10 @@ extension StartController: UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width - 32, height: 80)
     }
-    
+
     @objc func registerLocal() {
         let center = UNUserNotificationCenter.current()
-        
+
         center.requestAuthorization(options: [.alert, .badge, .sound]){(granted, error) in
             if granted {
                 print("good")
@@ -100,7 +137,7 @@ extension StartController: UICollectionViewDelegate, UICollectionViewDataSource,
             }
         }
     }
-    
+
     @objc func scheduleLocal() {
 //        let center = UNUserNotificationCenter.current()
 //
@@ -124,6 +161,6 @@ extension StartController: UICollectionViewDelegate, UICollectionViewDataSource,
             print(Double(index) * 0.1)
             sleep(1)
         }
-        
+
     }
 }
