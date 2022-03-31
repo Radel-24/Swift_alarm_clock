@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0837A43827F62457009AD88A /* writeToFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0837A43727F62457009AD88A /* writeToFile.swift */; };
 		08E34AA127F489670003FC1A /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E34AA027F489670003FC1A /* ClockViewModel.swift */; };
 		0B4C005427F4CC3400421A92 /* ClockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C005327F4CC3400421A92 /* ClockController.swift */; };
 		BD1C881827EDBA8F005A8A58 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1C881727EDBA8F005A8A58 /* UIStackView+Extension.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0837A43727F62457009AD88A /* writeToFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = writeToFile.swift; sourceTree = "<group>"; };
 		08E34AA027F489670003FC1A /* ClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		0B4C005327F4CC3400421A92 /* ClockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockController.swift; sourceTree = "<group>"; };
 		BD1C881727EDBA8F005A8A58 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				BD3BF2A127EBA3D000E28212 /* UIView+Extensions.swift */,
 				BD1C881727EDBA8F005A8A58 /* UIStackView+Extension.swift */,
 				BD1C882027EDCFDB005A8A58 /* UIColor+Extension.swift */,
+				0837A43727F62457009AD88A /* writeToFile.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				BD3BF29227EB9BB300E28212 /* Model.swift in Sources */,
 				BD3BF27627EB754100E28212 /* StartViewController.swift in Sources */,
 				BD3BF27227EB754100E28212 /* AppDelegate.swift in Sources */,
+				0837A43827F62457009AD88A /* writeToFile.swift in Sources */,
 				BD3BF27427EB754100E28212 /* SceneDelegate.swift in Sources */,
 				BD1C882127EDCFDB005A8A58 /* UIColor+Extension.swift in Sources */,
 				BD3BF29C27EB9D0500E28212 /* Array+Extension.swift in Sources */,

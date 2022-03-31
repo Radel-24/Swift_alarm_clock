@@ -41,12 +41,33 @@ class ClockCell: UICollectionViewCell {
         return button
     }()
     
+//    private var viewModel: ClockViewModel
     // brauche hier id um aus dem clocks array die richtige cell zu löschen
     // --> selbe logik wie bei StartViewController in "addTapped" function (line: 35)
+    
+    private var clockID : Int?
+    
     @objc func deleteAlarm(_ sender:UIButton)
     {
-        
-        print("DELETE ME")
+        print("deleteAlarm (doesnt do anything)")
+//        print("before deletion:")
+//        print(clocks.count)
+//        let toBeDeleted = clocks.first(where: {$0.id == clockID!}) ?? nil
+//        if (toBeDeleted != nil) {
+//            clocks.remove(at: clocks.firstIndex(of: toBeDeleted!)!)
+//        }
+//        print("\nafter deletion:")
+//        print(clocks.count)
+//        do {
+//            let encoder = JSONEncoder()
+//            encoder.outputFormatting = .prettyPrinted
+//            let JsonData = try encoder.encode(clocks)
+//            try JsonData.write(to: subUrl!)
+////            let viewController = StartController()
+//            super.StartController.reloaderrr()
+//        } catch {
+//            print("error: saveClocks failed")
+//        }
     }
 
 
@@ -70,6 +91,7 @@ class ClockCell: UICollectionViewCell {
     
 
     override init(frame: CGRect) {
+        
         super.init(frame: frame)
 
         setupView()
@@ -83,6 +105,7 @@ class ClockCell: UICollectionViewCell {
     private func setupView() {
         switchView.addTarget(self, action: #selector(switchStateDidChange(_:)), for: .valueChanged)
         deleteButton.addTarget(self, action: #selector(deleteAlarm(_:)), for: .touchUpInside)
+        
 
 
         layer.cornerRadius = 10
@@ -115,6 +138,7 @@ class ClockCell: UICollectionViewCell {
 
     func configureWith(_ clock: Clock, capableOfHidden: Bool = false, chevronHidden: Bool = false) {
         nameLabel.text = clock.name
+        clockID = clock.id
         chevronImageView.isHidden = chevronHidden
     }
 }

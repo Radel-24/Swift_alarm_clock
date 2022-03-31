@@ -56,7 +56,78 @@ class ClockController: UIViewController {
         date.translatesAutoresizingMaskIntoConstraints = false
         return date;
     }()
+    
+    private let internDeleteButton: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setTitle("DELETE", for: .normal)
+        btn.setTitleColor(.red, for: .normal)
+        btn.addTarget(self, action: #selector(tappedInternDelete(_:)), for: .touchUpInside)
+        return btn
+    }()
+    
+    private let nameTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.clearButtonMode = .always
+        textField.backgroundColor = .white
+        return textField
+    }()
+    
+    private let saveButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("SAVE", for: .normal)
+        button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func tappedInternDelete(_ sender:UIButton!) {
+        print("tappedInternDelete! (doesnt do anything)")
 
+//        alertMessage()
+//        deleteClock()
+//        StartController.saveClocks()
+    }
+    
+    @objc func saveButtonPressed() {
+        clocks[viewModel.clockId].name = nameTextField.text!
+        writeToFile(location: subUrl!)
+    }
+//
+//    func alertMessage() {
+//        let alertController:UIAlertController = UIAlertController(title: "Deleted", message: clocks[viewModel.clockId].name, preferredStyle: UIAlertController.Style.alert)
+//        let alertAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:nil)
+//        alertController.addAction(alertAction)
+//        present(alertController, animated: true, completion: nil)
+//    }
+//
+//    func deleteClock() {
+////        print(where: {$0.id == clocks[viewModel.clockId].id})
+//        if clocks.contains(where: {$0.id == clocks[viewModel.clockId].id}) {
+//           print("EXISTS")
+//        } else {
+//           print("DOESNT EXIST")
+//        }
+//        print(clocks)
+//        clocks.remove(at: clocks[viewModel.clockId].id)
+//        print(clocks)
+//    }
+//
+//    func saveClocks() {
+//        do {
+//            let encoder = JSONEncoder()
+//            encoder.outputFormatting = .prettyPrinted
+//            let JsonData = try encoder.encode(clocks)
+//            try JsonData.write(to: subUrl!)
+//            StartController.save
+////            collectionView.reloadData()
+//        } catch {
+//            print("error: saveClocks failed")
+//        }
+//    }
+
+    
     
     private let viewModel: ClockViewModel
     
@@ -72,6 +143,7 @@ class ClockController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        nameTextField.text = clocks[viewModel.clockId].name
         title = clocks[viewModel.clockId].name
         setupView()
     }
@@ -92,7 +164,10 @@ class ClockController: UIViewController {
             dateLabelFrom,
             dateLabelTo,
             datePickerFrom,
-            datePickerTo
+            datePickerTo,
+            internDeleteButton,
+            saveButton,
+            nameTextField
         ])
     
         
@@ -127,7 +202,19 @@ class ClockController: UIViewController {
             datePickerTo.centerYAnchor.constraint(equalTo: dateLabelTo.centerYAnchor),
             datePickerTo.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
             datePickerTo.heightAnchor.constraint(equalToConstant: 44),
-            datePickerTo.widthAnchor.constraint(equalToConstant: 127)
+            datePickerTo.widthAnchor.constraint(equalToConstant: 127),
+            
+            internDeleteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            internDeleteButton.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -96),
+            
+            nameTextField.topAnchor.constraint(equalTo: dateLabelFrom.bottomAnchor, constant: 96),
+            nameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            nameTextField.heightAnchor.constraint(equalToConstant: 40),
+            nameTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 64),
+            nameTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -64),
+            
+            saveButton.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10),
+            saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
 
         ])
     }

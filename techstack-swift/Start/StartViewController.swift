@@ -27,16 +27,25 @@ class StartController: UIViewController {
         view.backgroundColor = .lightGray
         navigationController?.navigationBar.barStyle = .default
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        
         let btnAdd = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
         btnAdd.tintColor = .black
         navigationItem.rightBarButtonItem = btnAdd
+        
+        let btnEdit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
+        btnEdit.tintColor = .black
+        navigationItem.leftBarButtonItem = btnEdit
     }
 
     @objc func addTapped(_ sender:UIViewController!) {
-        print("TAPPED!");
+        print("addTapped!");
         alertMessage()
         addClock()
         saveClocks()
+    }
+    
+    @objc func editTapped(_ sender:UIViewController!) {
+        print("editTapped!");
     }
     
     func alertMessage() {
@@ -65,6 +74,7 @@ class StartController: UIViewController {
             print("error: saveClocks failed")
         }
     }
+    
 
     
     private func setupCollectionView() {
