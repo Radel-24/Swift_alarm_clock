@@ -32,50 +32,38 @@ class StartController: UIViewController {
         btnAdd.tintColor = .black
         navigationItem.rightBarButtonItem = btnAdd
         
-        let btnEdit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
-        btnEdit.tintColor = .black
-        navigationItem.leftBarButtonItem = btnEdit
+//        let btnEdit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
+//        btnEdit.tintColor = .black
+//        navigationItem.leftBarButtonItem = btnEdit
     }
 
     @objc func addTapped(_ sender:UIViewController!) {
-        print("addTapped!");
-        alertMessage()
+//        print("addTapped!");
+//        alertMessage()
         addClock()
-        saveClocks()
+        writeToFile(location: subUrl!)
+        collectionView.reloadData()
     }
     
-    @objc func editTapped(_ sender:UIViewController!) {
-        print("editTapped!");
-    }
+//    @objc func editTapped(_ sender:UIViewController!) {
+//        print("editTapped!");
+//    }
     
-    func alertMessage() {
-        let alertController:UIAlertController = UIAlertController(title: "Added", message: "New Alarm", preferredStyle: UIAlertController.Style.alert)
-        let alertAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:nil)
-        alertController.addAction(alertAction)
-        present(alertController, animated: true, completion: nil)
-    }
+//    func alertMessage() {
+//        let alertController:UIAlertController = UIAlertController(title: "Added", message: "New Alarm", preferredStyle: UIAlertController.Style.alert)
+//        let alertAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:nil)
+//        alertController.addAction(alertAction)
+//        present(alertController, animated: true, completion: nil)
+//    }
     
     func addClock() {
         var newID = 0
         if (clocks.count > 0) {
             newID = clocks[clocks.count - 1].id + 1
         }
-        clocks.append(techstack_swift.Clock(id: newID, name: "Alarm", daysOfWeek: [0]))
+        clocks.append(techstack_swift.Clock(id: newID, name: "New Alarm", daysOfWeek: [0]))
     }
     
-    func saveClocks() {
-        do {
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = .prettyPrinted
-            let JsonData = try encoder.encode(clocks)
-            try JsonData.write(to: subUrl!)
-            collectionView.reloadData()
-        } catch {
-            print("error: saveClocks failed")
-        }
-    }
-    
-
     
     private func setupCollectionView() {
         collectionView.register(ClockCell.self, forCellWithReuseIdentifier: "ClockCell")
@@ -115,7 +103,7 @@ extension StartController: UICollectionViewDelegate, UICollectionViewDataSource,
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let clock = viewModel.itemAt(indexPath.item) else { return }
-        let controller = ClockController(viewModel: ClockViewModel(clock: clock))
+        let controller = ClockController(viewModel: ClockViewModel(clock: clock, collectionView: collectionView))
         
         navigationController?.pushViewController(controller, animated: true)
 //        present(controller, animated: true, completion: nil)

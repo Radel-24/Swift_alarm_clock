@@ -58,11 +58,11 @@ class ClockController: UIViewController {
     }()
     
     private let internDeleteButton: UIButton = {
-        let btn = UIButton()
+        let btn = UIButton(type: .system)
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("DELETE", for: .normal)
         btn.setTitleColor(.red, for: .normal)
-        btn.addTarget(self, action: #selector(tappedInternDelete(_:)), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(deleteAlertMessage(_:)), for: .touchUpInside)
         return btn
     }()
     
@@ -82,52 +82,49 @@ class ClockController: UIViewController {
         return button
     }()
     
-    @objc func tappedInternDelete(_ sender:UIButton!) {
-        print("tappedInternDelete! (doesnt do anything)")
-
-//        alertMessage()
-//        deleteClock()
-//        StartController.saveClocks()
+    private let testTextField: UITextField = {
+        let field = UITextField()
+        field.backgroundColor = .blue
+        field.translatesAutoresizingMaskIntoConstraints = false
+        return field
+    }()
+    
+    @objc func deleteAlertMessage(_ sender:UIButton!) {
+        let alertController:UIAlertController = UIAlertController(title: "Delete", message: "Are you sure?", preferredStyle: UIAlertController.Style.alert)
+        
+        alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.destructive, handler: { (action: UIAlertAction!) in
+            self.choseToDelete()
+            }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:nil))
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func choseToDelete() {
+        deleteClock()
+        writeToFile(location: subUrl!)
+        viewModel.collectionView.reloadData()
+        _ = navigationController?.popViewController(animated: true)
+    }
+    
+    func deleteClock() {
+//        print("before remove:")
+//        print(clocks)
+        let element = clocks.first(where: {$0.id == viewModel.clockId})
+        let index = clocks.firstIndex(of: element!)
+        clocks.remove(at: index!)
+//        print("after remove:")
+//        print(clocks)
     }
     
     @objc func saveButtonPressed() {
         clocks[viewModel.clockId].name = nameTextField.text!
         writeToFile(location: subUrl!)
+        title = clocks[viewModel.clockId].name
+        viewModel.collectionView.reloadData()
     }
-//
-//    func alertMessage() {
-//        let alertController:UIAlertController = UIAlertController(title: "Deleted", message: clocks[viewModel.clockId].name, preferredStyle: UIAlertController.Style.alert)
-//        let alertAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:nil)
-//        alertController.addAction(alertAction)
-//        present(alertController, animated: true, completion: nil)
-//    }
-//
-//    func deleteClock() {
-////        print(where: {$0.id == clocks[viewModel.clockId].id})
-//        if clocks.contains(where: {$0.id == clocks[viewModel.clockId].id}) {
-//           print("EXISTS")
-//        } else {
-//           print("DOESNT EXIST")
-//        }
-//        print(clocks)
-//        clocks.remove(at: clocks[viewModel.clockId].id)
-//        print(clocks)
-//    }
-//
-//    func saveClocks() {
-//        do {
-//            let encoder = JSONEncoder()
-//            encoder.outputFormatting = .prettyPrinted
-//            let JsonData = try encoder.encode(clocks)
-//            try JsonData.write(to: subUrl!)
-//            StartController.save
-////            collectionView.reloadData()
-//        } catch {
-//            print("error: saveClocks failed")
-//        }
-//    }
 
-    
+
+
     
     private let viewModel: ClockViewModel
     
@@ -143,8 +140,11 @@ class ClockController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        nameTextField.text = clocks[viewModel.clockId].name
-        title = clocks[viewModel.clockId].name
+        let element = clocks.first(where: {$0.id == viewModel.clockId})
+        let index = clocks.firstIndex(of: element!)
+//        print("index: \(index!)")
+        nameTextField.text = clocks[index!].name
+        title = clocks[index!].name
         setupView()
     }
     
