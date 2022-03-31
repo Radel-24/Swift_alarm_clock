@@ -41,19 +41,28 @@ class StartController: UIViewController {
         let btnAdd = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
         btnAdd.tintColor = .black
         navigationItem.rightBarButtonItem = btnAdd
+<<<<<<< HEAD
 
         let btnEdit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
         btnEdit.tintColor = .black
         navigationItem.leftBarButtonItem = btnEdit
         collectionView.reloadData()
+=======
+        
+//        let btnEdit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
+//        btnEdit.tintColor = .black
+//        navigationItem.leftBarButtonItem = btnEdit
+>>>>>>> e79f29e10d1cd49768fc630ab50c8bc96679a8cb
     }
 
     @objc func addTapped(_ sender:UIViewController!) {
-        print("addTapped!");
-        alertMessage()
+//        print("addTapped!");
+//        alertMessage()
         addClock()
-        saveClocks()
+        writeToFile(location: subUrl!)
+        collectionView.reloadData()
     }
+<<<<<<< HEAD
 
     @objc func editTapped(_ sender:UIViewController!) {
         print("editTapped!");
@@ -66,11 +75,26 @@ class StartController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
 
+=======
+    
+//    @objc func editTapped(_ sender:UIViewController!) {
+//        print("editTapped!");
+//    }
+    
+//    func alertMessage() {
+//        let alertController:UIAlertController = UIAlertController(title: "Added", message: "New Alarm", preferredStyle: UIAlertController.Style.alert)
+//        let alertAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:nil)
+//        alertController.addAction(alertAction)
+//        present(alertController, animated: true, completion: nil)
+//    }
+    
+>>>>>>> e79f29e10d1cd49768fc630ab50c8bc96679a8cb
     func addClock() {
         var newID = 0
         if (clocks.count > 0) {
             newID = clocks[clocks.count - 1].id + 1
         }
+<<<<<<< HEAD
         clocks.append(techstack_swift.Clock(id: newID, name: "Alarm", daysOfWeek: [0]))
     }
 
@@ -88,6 +112,12 @@ class StartController: UIViewController {
 
 
 
+=======
+        clocks.append(techstack_swift.Clock(id: newID, name: "New Alarm", daysOfWeek: [0]))
+    }
+    
+    
+>>>>>>> e79f29e10d1cd49768fc630ab50c8bc96679a8cb
     private func setupCollectionView() {
         collectionView.register(ClockCell.self, forCellWithReuseIdentifier: "ClockCell")
         collectionView.delegate = self
@@ -127,7 +157,11 @@ extension StartController: UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let clock = viewModel.itemAt(indexPath.item) else { return }
         let controller = ClockController(viewModel: ClockViewModel(clock: clock, collectionView: collectionView))
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> e79f29e10d1cd49768fc630ab50c8bc96679a8cb
         navigationController?.pushViewController(controller, animated: true)
 //        present(controller, animated: true, completion: nil)
     }

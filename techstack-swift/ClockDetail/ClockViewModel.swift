@@ -16,13 +16,13 @@ class ClockViewModel {
     init(clock: Clock, collectionView: UICollectionView) {
         self.clock = clock
         self.collectionView = collectionView
-        
+
     }
     var clockId: Int {
         clock.id
     }
-    
-    
+
+
 
 
 }
