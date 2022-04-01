@@ -57,19 +57,8 @@ class StartController: UIViewController {
 //    }
     
     func addClock() {
-<<<<<<< HEAD
-        var newID = 0
-        if (clocks.count > 0) {
-            newID = clocks[clocks.count - 1].id + 1
-        }
-        clocks.append(techstack_swift.Clock(id: newID, name: "New Alarm", daysOfWeek: [0], selectedDays: [false, false, false, false, false, false, false]))
-=======
         let newID = UUID.init()
-//        if (clocks.count > 0) {
-//            newID = clocks[clocks.count - 1].id + 1
-//        }
-        clocks.append(techstack_swift.Clock(id: newID, name: "New Alarm", daysOfWeek: [0], ringDays: [], isActivated: true, ringTime: DateComponents.init(), notificationId: UUID().uuidString))
->>>>>>> 1ce8c2a316fd7d425c20f408063c415672dceb7a
+        clocks.append(techstack_swift.Clock(id: newID, name: "New Alarm", daysOfWeek: [0], ringDays: [], isActivated: true, ringTime: DateComponents.init(), notificationId: UUID().uuidString, selectedDays: [false, false, false, false, false, false, false]))
     }
     
     

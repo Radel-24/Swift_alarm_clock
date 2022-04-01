@@ -11,11 +11,11 @@ struct Clock: Codable, Identifiable, Hashable {
     var id: UUID
     var name: String
     var daysOfWeek: [Int]
-    var selectedDays: [Bool]
     var ringDays: [Date]
     var isActivated: Bool
     var ringTime: DateComponents
     var notificationId: String
+    var selectedDays: [Bool]
 }
 
 

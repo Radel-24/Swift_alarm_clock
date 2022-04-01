@@ -22,33 +22,6 @@ class ClockController: UIViewController {
         return time
     }()
     
-    private let dateLabelFrom: UILabel = {
-       let label = UILabel()
-        label.text = "From"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label;
-    }()
-    
-    private let dateLabelTo: UILabel = {
-       let label = UILabel()
-        label.text = "To"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label;
-    }()
-    
-    private let datePickerFrom: UIDatePicker = {
-       let date = UIDatePicker()
-        date.datePickerMode = .date
-        date.translatesAutoresizingMaskIntoConstraints = false
-        return date;
-    }()
-    
-    private let datePickerTo: UIDatePicker = {
-       let date = UIDatePicker()
-        date.datePickerMode = .date
-        date.translatesAutoresizingMaskIntoConstraints = false
-        return date;
-    }()
     
     private let repeatDaysButton: UIButton = {
         let btn = UIButton(type: .system)
@@ -97,22 +70,20 @@ class ClockController: UIViewController {
     
     private let calendarButton: UIButton = {
         let btn = UIButton(type: .system)
+        
+        btn.backgroundColor = .white
+        btn.layer.cornerRadius = 5
+        btn.layer.borderWidth = 1
+        btn.layer.borderColor = UIColor.black.cgColor
+        
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Calendar View", for: .normal)
-        btn.setTitleColor(.red, for: .normal)
+//        btn.setTitleColor(.red, for: .normal)
         btn.addTarget(self, action: #selector(calendarButtonPressed), for: .touchUpInside)
         return btn
     }()
     
-    private let nameTextField: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.clearButtonMode = .always
-        textField.backgroundColor = .white
-        return textField
-    }()
-    
-    
+
     
     @objc func alertTextField(_ sender:UIButton!) {
         let alertController:UIAlertController = UIAlertController(title: "Edit Title", message: nil, preferredStyle: UIAlertController.Style.alert)
@@ -120,9 +91,9 @@ class ClockController: UIViewController {
         alertController.addTextField { (textField) in
             textField.text = clocks[self.currentIndex!].name
         }
-        
+        let clockIndex = clocks.firstIndex(where: {$0.id == viewModel.clockId})
         alertController.addAction(UIAlertAction(title: "Save", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
-            clocks[self.viewModel.clockId].name = alertController.textFields![0].text!
+            clocks[clockIndex!].name = alertController.textFields![0].text!
             self.editNameSave()
             }))
         
@@ -131,8 +102,9 @@ class ClockController: UIViewController {
     }
     
     func editNameSave() {
+        let clockIndex = clocks.firstIndex(where: {$0.id == viewModel.clockId})
             writeToFile(location: subUrl!)
-            title = clocks[viewModel.clockId].name
+            title = clocks[clockIndex!].name
             viewModel.collectionView.reloadData()
     }
     
@@ -166,12 +138,6 @@ class ClockController: UIViewController {
         clocks.remove(at: index!)
     }
     
-//    @objc func saveButtonPressed() {
-//        clocks[viewModel.clockId].name = nameTextField.text!
-//        writeToFile(location: subUrl!)
-//        title = clocks[viewModel.clockId].name
-//        viewModel.collectionView.reloadData()
-//    }
     
 //    @objc func editTapped(_ sender:UIViewController!) {
 //        let alertController:UIAlertController = UIAlertController(title: "Edit Title", message: nil, preferredStyle: UIAlertController.Style.alert)
@@ -245,15 +211,9 @@ class ClockController: UIViewController {
         
         containerView.addSubviews([
             timePicker,
-            dateLabelFrom,
-            dateLabelTo,
-            datePickerFrom,
-            datePickerTo,
             internDeleteButton,
             editNameButton,
-            repeatDaysButton
-            // saveButton,
-            nameTextField,
+            repeatDaysButton,
             calendarButton
         ])
     
@@ -264,33 +224,14 @@ class ClockController: UIViewController {
             containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
          
-            
 //            timePicker.centerYAnchor.constraint(equalTo: alarmLabel.centerYAnchor),
             timePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 //            timePicker.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
             timePicker.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 48),
-            timePicker.heightAnchor.constraint(equalToConstant: 44),
-            
-            dateLabelFrom.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            dateLabelFrom.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 48),
-            dateLabelFrom.rightAnchor.constraint(equalTo: datePickerFrom.leftAnchor, constant: -8),
-   
-            dateLabelTo.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            dateLabelTo.rightAnchor.constraint(equalTo: datePickerTo.leftAnchor, constant: -8),
-            dateLabelTo.topAnchor.constraint(equalTo: dateLabelFrom.bottomAnchor, constant: 16),
-            
-            datePickerFrom.centerYAnchor.constraint(equalTo: dateLabelFrom.centerYAnchor),
-            datePickerFrom.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
-            datePickerFrom.heightAnchor.constraint(equalToConstant: 44),
-            datePickerFrom.widthAnchor.constraint(equalToConstant: 127),
-            
-            datePickerTo.centerYAnchor.constraint(equalTo: dateLabelTo.centerYAnchor),
-            datePickerTo.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
-            datePickerTo.heightAnchor.constraint(equalToConstant: 44),
-            datePickerTo.widthAnchor.constraint(equalToConstant: 127),
+            timePicker.heightAnchor.constraint(equalToConstant: 48),
             
             
-            editNameButton.topAnchor.constraint(equalTo: dateLabelFrom.bottomAnchor, constant: 96),
+            editNameButton.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 96),
             editNameButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             editNameButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
             editNameButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
@@ -300,16 +241,17 @@ class ClockController: UIViewController {
             repeatDaysButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
             repeatDaysButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
             
+            calendarButton.topAnchor.constraint(equalTo: repeatDaysButton.bottomAnchor, constant: 16),
+            calendarButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            calendarButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+            calendarButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
+            
             internDeleteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            internDeleteButton.topAnchor.constraint(equalTo: repeatDaysButton.bottomAnchor, constant: 16),
+            internDeleteButton.topAnchor.constraint(equalTo: calendarButton.bottomAnchor, constant: 16),
             internDeleteButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
             internDeleteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
             
-            // saveButton.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10),
-            // saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            calendarButton.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 10),
-            calendarButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        
 
         ])
     }
