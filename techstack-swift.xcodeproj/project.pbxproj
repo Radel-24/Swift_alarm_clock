@@ -10,6 +10,12 @@
 		0837A43827F62457009AD88A /* writeToFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0837A43727F62457009AD88A /* writeToFile.swift */; };
 		08E34AA127F489670003FC1A /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E34AA027F489670003FC1A /* ClockViewModel.swift */; };
 		0B4C005427F4CC3400421A92 /* ClockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C005327F4CC3400421A92 /* ClockController.swift */; };
+		0B5EBDF227F6DC9600577EC7 /* CalendarDateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5EBDEE27F6DC9600577EC7 /* CalendarDateCollectionViewCell.swift */; };
+		0B5EBDF327F6DC9600577EC7 /* CalendarPickerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5EBDEF27F6DC9600577EC7 /* CalendarPickerFooterView.swift */; };
+		0B5EBDF427F6DC9600577EC7 /* CalendarPickerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5EBDF027F6DC9600577EC7 /* CalendarPickerHeaderView.swift */; };
+		0B5EBDF527F6DC9600577EC7 /* CalendarPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5EBDF127F6DC9600577EC7 /* CalendarPickerViewController.swift */; };
+		0B5EBDF927F6DDBB00577EC7 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5EBDF727F6DDBB00577EC7 /* Day.swift */; };
+		0B5EBDFA27F6DDBB00577EC7 /* MonthMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5EBDF827F6DDBB00577EC7 /* MonthMetadata.swift */; };
 		BD1C881827EDBA8F005A8A58 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1C881727EDBA8F005A8A58 /* UIStackView+Extension.swift */; };
 		BD1C882127EDCFDB005A8A58 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1C882027EDCFDB005A8A58 /* UIColor+Extension.swift */; };
 		BD3BF27227EB754100E28212 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF27127EB754100E28212 /* AppDelegate.swift */; };
@@ -18,7 +24,7 @@
 		BD3BF27B27EB754200E28212 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD3BF27A27EB754200E28212 /* Assets.xcassets */; };
 		BD3BF27E27EB754200E28212 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD3BF27C27EB754200E28212 /* LaunchScreen.storyboard */; };
 		BD3BF28927EB77E900E28212 /* ClockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF28827EB77E900E28212 /* ClockCell.swift */; };
-		BD3BF29227EB9BB300E28212 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF28D27EB9BB300E28212 /* Model.swift */; };
+		BD3BF29227EB9BB300E28212 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF28D27EB9BB300E28212 /* Clock.swift */; };
 		BD3BF29327EB9BB300E28212 /* Clocks.json in Resources */ = {isa = PBXBuildFile; fileRef = BD3BF28E27EB9BB300E28212 /* Clocks.json */; };
 		BD3BF29427EB9BB300E28212 /* DecodeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF28F27EB9BB300E28212 /* DecodeHelper.swift */; };
 		BD3BF29927EB9BCE00E28212 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3BF29827EB9BCE00E28212 /* StartViewModel.swift */; };
@@ -30,6 +36,12 @@
 		0837A43727F62457009AD88A /* writeToFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = writeToFile.swift; sourceTree = "<group>"; };
 		08E34AA027F489670003FC1A /* ClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		0B4C005327F4CC3400421A92 /* ClockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockController.swift; sourceTree = "<group>"; };
+		0B5EBDEE27F6DC9600577EC7 /* CalendarDateCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDateCollectionViewCell.swift; sourceTree = "<group>"; };
+		0B5EBDEF27F6DC9600577EC7 /* CalendarPickerFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPickerFooterView.swift; sourceTree = "<group>"; };
+		0B5EBDF027F6DC9600577EC7 /* CalendarPickerHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPickerHeaderView.swift; sourceTree = "<group>"; };
+		0B5EBDF127F6DC9600577EC7 /* CalendarPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPickerViewController.swift; sourceTree = "<group>"; };
+		0B5EBDF727F6DDBB00577EC7 /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		0B5EBDF827F6DDBB00577EC7 /* MonthMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthMetadata.swift; sourceTree = "<group>"; };
 		BD1C881727EDBA8F005A8A58 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		BD1C882027EDCFDB005A8A58 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		BD3BF26E27EB754100E28212 /* techstack-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "techstack-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,7 +52,7 @@
 		BD3BF27D27EB754200E28212 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BD3BF27F27EB754200E28212 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD3BF28827EB77E900E28212 /* ClockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockCell.swift; sourceTree = "<group>"; };
-		BD3BF28D27EB9BB300E28212 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		BD3BF28D27EB9BB300E28212 /* Clock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
 		BD3BF28E27EB9BB300E28212 /* Clocks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Clocks.json; sourceTree = "<group>"; };
 		BD3BF28F27EB9BB300E28212 /* DecodeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodeHelper.swift; sourceTree = "<group>"; };
 		BD3BF29827EB9BCE00E28212 /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
@@ -68,6 +80,17 @@
 			path = ClockDetail;
 			sourceTree = "<group>";
 		};
+		0B5EBDED27F6DC9600577EC7 /* CalendarPicker */ = {
+			isa = PBXGroup;
+			children = (
+				0B5EBDEE27F6DC9600577EC7 /* CalendarDateCollectionViewCell.swift */,
+				0B5EBDEF27F6DC9600577EC7 /* CalendarPickerFooterView.swift */,
+				0B5EBDF027F6DC9600577EC7 /* CalendarPickerHeaderView.swift */,
+				0B5EBDF127F6DC9600577EC7 /* CalendarPickerViewController.swift */,
+			);
+			path = CalendarPicker;
+			sourceTree = "<group>";
+		};
 		BD3BF26527EB754100E28212 = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +110,7 @@
 		BD3BF27027EB754100E28212 /* techstack-swift */ = {
 			isa = PBXGroup;
 			children = (
+				0B5EBDED27F6DC9600577EC7 /* CalendarPicker */,
 				08E34A9B27F488BB0003FC1A /* ClockDetail */,
 				BD97B7E727F0B61100EC2692 /* Application */,
 				BD97B7E227F0B5EE00EC2692 /* Start */,
@@ -102,8 +126,10 @@
 		BD3BF29627EB9BB900E28212 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				0B5EBDF727F6DDBB00577EC7 /* Day.swift */,
+				0B5EBDF827F6DDBB00577EC7 /* MonthMetadata.swift */,
 				BD3BF28F27EB9BB300E28212 /* DecodeHelper.swift */,
-				BD3BF28D27EB9BB300E28212 /* Model.swift */,
+				BD3BF28D27EB9BB300E28212 /* Clock.swift */,
 				BD3BF28E27EB9BB300E28212 /* Clocks.json */,
 			);
 			path = Data;
@@ -211,16 +237,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B4C005427F4CC3400421A92 /* ClockController.swift in Sources */,
+				0B5EBDFA27F6DDBB00577EC7 /* MonthMetadata.swift in Sources */,
+				0B5EBDF427F6DC9600577EC7 /* CalendarPickerHeaderView.swift in Sources */,
+				0B5EBDF227F6DC9600577EC7 /* CalendarDateCollectionViewCell.swift in Sources */,
 				BD3BF29927EB9BCE00E28212 /* StartViewModel.swift in Sources */,
 				BD3BF2A227EBA3D000E28212 /* UIView+Extensions.swift in Sources */,
-				BD3BF29227EB9BB300E28212 /* Model.swift in Sources */,
+				BD3BF29227EB9BB300E28212 /* Clock.swift in Sources */,
 				BD3BF27627EB754100E28212 /* StartViewController.swift in Sources */,
 				BD3BF27227EB754100E28212 /* AppDelegate.swift in Sources */,
 				0837A43827F62457009AD88A /* writeToFile.swift in Sources */,
 				BD3BF27427EB754100E28212 /* SceneDelegate.swift in Sources */,
+				0B5EBDF527F6DC9600577EC7 /* CalendarPickerViewController.swift in Sources */,
 				BD1C882127EDCFDB005A8A58 /* UIColor+Extension.swift in Sources */,
 				BD3BF29C27EB9D0500E28212 /* Array+Extension.swift in Sources */,
+				0B5EBDF327F6DC9600577EC7 /* CalendarPickerFooterView.swift in Sources */,
 				BD3BF28927EB77E900E28212 /* ClockCell.swift in Sources */,
+				0B5EBDF927F6DDBB00577EC7 /* Day.swift in Sources */,
 				BD1C881827EDBA8F005A8A58 /* UIStackView+Extension.swift in Sources */,
 				BD3BF29427EB9BB300E28212 /* DecodeHelper.swift in Sources */,
 				08E34AA127F489670003FC1A /* ClockViewModel.swift in Sources */,
@@ -363,12 +395,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5DR5YYJ2CC;
+				DEVELOPMENT_TEAM = 6KH8F5FR45;
 				INFOPLIST_FILE = "techstack-swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--generate-entitlement-der";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.schwarzit.techstack-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -382,12 +415,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5DR5YYJ2CC;
+				DEVELOPMENT_TEAM = 6KH8F5FR45;
 				INFOPLIST_FILE = "techstack-swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--generate-entitlement-der";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.schwarzit.techstack-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

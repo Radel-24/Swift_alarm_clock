@@ -11,15 +11,21 @@ import UIKit
 class ClockViewModel {
     private let clock: Clock
     let collectionView: UICollectionView
+    public var today: Date
 
 
     init(clock: Clock, collectionView: UICollectionView) {
         self.clock = clock
         self.collectionView = collectionView
-        
+        today = Date.init()
     }
-    var clockId: Int {
+    
+    var clockId: UUID {
         clock.id
     }
+    
+//    var clockDate: Date {
+//        today
+//    }
     
 }
