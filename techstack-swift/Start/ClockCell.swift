@@ -66,7 +66,7 @@ class ClockCell: UICollectionViewCell {
 //            print("error: saveClocks failed")
 //        }
 //    }
-
+    var switchValueChanged: ((Bool) -> ()) = { _ in }
 
     @objc func switchStateDidChange(_ sender:UISwitch!)
     {
@@ -84,6 +84,7 @@ class ClockCell: UICollectionViewCell {
         }
 //        print(defaults.bool(forKey: "Monday"))
 //        print(defaults.bool(forKey: "Tuesday"))
+        switchValueChanged(sender.isOn)
     }
     
 
@@ -135,6 +136,7 @@ class ClockCell: UICollectionViewCell {
 
     func configureWith(_ clock: Clock, capableOfHidden: Bool = false, chevronHidden: Bool = false) {
         nameLabel.text = clock.name
+        switchView.isOn = clock.isActivated
 //        clockID = clock.id
         chevronImageView.isHidden = chevronHidden
     }

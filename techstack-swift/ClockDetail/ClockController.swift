@@ -92,6 +92,24 @@ class ClockController: UIViewController {
         editName.setTitle("Edit Title", for: .normal)
         editName.addTarget(self, action: #selector(alertTextField(_:)), for: .touchUpInside)
         return editName
+
+    }()
+    
+    private let calendarButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setTitle("Calendar View", for: .normal)
+        btn.setTitleColor(.red, for: .normal)
+        btn.addTarget(self, action: #selector(calendarButtonPressed), for: .touchUpInside)
+        return btn
+    }()
+    
+    private let nameTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.clearButtonMode = .always
+        textField.backgroundColor = .white
+        return textField
     }()
     
     
@@ -203,6 +221,18 @@ class ClockController: UIViewController {
         setupView()
     }
     
+    @objc func calendarButtonPressed() {
+        let today = Date.init()
+        let controller = CalendarPickerViewController(baseDate: today, selectedDateChanged: { [weak self] date in
+            guard let self = self else { return }
+            self.viewModel.today = date
+//            self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
+        }, clockId: viewModel.clockId)
+        
+//        navigationController?.pushViewController(controller, animated: true)
+        present(controller, animated: true, completion: nil)
+    }
+    
     private func setupView() {
         view.backgroundColor = .lightGray
         setupCollectionView()
@@ -222,6 +252,9 @@ class ClockController: UIViewController {
             internDeleteButton,
             editNameButton,
             repeatDaysButton
+            // saveButton,
+            nameTextField,
+            calendarButton
         ])
     
         
@@ -272,6 +305,11 @@ class ClockController: UIViewController {
             internDeleteButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
             internDeleteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
             
+            // saveButton.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10),
+            // saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            calendarButton.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 10),
+            calendarButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
 
         ])
     }
@@ -395,12 +433,3 @@ class ClockController: UIViewController {
 //        self.present(alert, animated: true, completion: nil)
 //    }
 //
-//    func writeToFile(location: URL) {
-//        do {
-//            let encoder = JSONEncoder()
-//            encoder.outputFormatting = .prettyPrinted
-//            let JsonData = try encoder.encode(clocks)
-//            try JsonData.write(to: location)
-//        }catch{}
-//    }
-

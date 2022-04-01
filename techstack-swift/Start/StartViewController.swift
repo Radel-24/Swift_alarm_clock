@@ -57,11 +57,19 @@ class StartController: UIViewController {
 //    }
     
     func addClock() {
+<<<<<<< HEAD
         var newID = 0
         if (clocks.count > 0) {
             newID = clocks[clocks.count - 1].id + 1
         }
         clocks.append(techstack_swift.Clock(id: newID, name: "New Alarm", daysOfWeek: [0], selectedDays: [false, false, false, false, false, false, false]))
+=======
+        let newID = UUID.init()
+//        if (clocks.count > 0) {
+//            newID = clocks[clocks.count - 1].id + 1
+//        }
+        clocks.append(techstack_swift.Clock(id: newID, name: "New Alarm", daysOfWeek: [0], ringDays: [], isActivated: true, ringTime: DateComponents.init(), notificationId: UUID().uuidString))
+>>>>>>> 1ce8c2a316fd7d425c20f408063c415672dceb7a
     }
     
     
@@ -87,9 +95,14 @@ class StartController: UIViewController {
 extension StartController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClockCell", for: indexPath) as? ClockCell,
-            let clock = viewModel.itemAt(indexPath.item) else { return UICollectionViewCell() }
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClockCell", for: indexPath) as? ClockCell else { return UICollectionViewCell() }
+        let clock = clocks[indexPath.item]
         cell.configureWith(clock)
+        cell.switchValueChanged = { switchValue in
+            print("Switch is \(switchValue)")
+            clocks[indexPath.item].isActivated = switchValue
+            writeToFile(location: subUrl!)
+        }
         return cell
     }
 
