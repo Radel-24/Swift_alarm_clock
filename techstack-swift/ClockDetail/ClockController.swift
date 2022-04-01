@@ -15,13 +15,6 @@ class ClockController: UIViewController {
         return view
     }()
     
-    private let alarmLabel: UILabel = {
-       let label = UILabel()
-        label.text = "Alarm"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label;
-    }()
-    
     private let timePicker: UIDatePicker = {
        let time = UIDatePicker()
         time.datePickerMode = .time
@@ -57,37 +50,73 @@ class ClockController: UIViewController {
         return date;
     }()
     
-    private let internDeleteButton: UIButton = {
+    private let repeatDaysButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle("DELETE", for: .normal)
-        btn.setTitleColor(.red, for: .normal)
-        btn.addTarget(self, action: #selector(deleteAlertMessage(_:)), for: .touchUpInside)
+        btn.setTitle("Repeat Days", for: .normal)
+//        btn.setTitleColor(.red, for: .normal)
+        btn.addTarget(self, action: #selector(loadRepeatDaysView(_:)), for: .touchUpInside)
+        
+        btn.backgroundColor = .white
+        btn.layer.cornerRadius = 5
+        btn.layer.borderWidth = 1
+        btn.layer.borderColor = UIColor.black.cgColor
+        
         return btn
     }()
     
-    private let nameTextField: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.clearButtonMode = .always
-        textField.backgroundColor = .white
-        return textField
+    private let internDeleteButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setTitle("Delete Alarm", for: .normal)
+        btn.setTitleColor(.red, for: .normal)
+        btn.addTarget(self, action: #selector(deleteAlertMessage(_:)), for: .touchUpInside)
+        
+        btn.backgroundColor = .white
+        btn.layer.cornerRadius = 5
+        btn.layer.borderWidth = 1
+        btn.layer.borderColor = UIColor.black.cgColor
+        
+        return btn
     }()
     
-    private let saveButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("SAVE", for: .normal)
-        button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
-        return button
+    private let editNameButton: UIButton = {
+        let editName = UIButton(type: .system)
+        
+        editName.backgroundColor = .white
+        editName.layer.cornerRadius = 5
+        editName.layer.borderWidth = 1
+        editName.layer.borderColor = UIColor.black.cgColor
+        
+        editName.translatesAutoresizingMaskIntoConstraints = false
+        editName.setTitle("Edit Title", for: .normal)
+        editName.addTarget(self, action: #selector(alertTextField(_:)), for: .touchUpInside)
+        return editName
     }()
     
-    private let testTextField: UITextField = {
-        let field = UITextField()
-        field.backgroundColor = .blue
-        field.translatesAutoresizingMaskIntoConstraints = false
-        return field
-    }()
+    
+    
+    @objc func alertTextField(_ sender:UIButton!) {
+        let alertController:UIAlertController = UIAlertController(title: "Edit Title", message: nil, preferredStyle: UIAlertController.Style.alert)
+        
+        alertController.addTextField { (textField) in
+            textField.text = clocks[self.currentIndex!].name
+        }
+        
+        alertController.addAction(UIAlertAction(title: "Save", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+            clocks[self.viewModel.clockId].name = alertController.textFields![0].text!
+            self.editNameSave()
+            }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:nil))
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func editNameSave() {
+            writeToFile(location: subUrl!)
+            title = clocks[viewModel.clockId].name
+            viewModel.collectionView.reloadData()
+    }
     
     @objc func deleteAlertMessage(_ sender:UIButton!) {
         let alertController:UIAlertController = UIAlertController(title: "Delete", message: "Are you sure?", preferredStyle: UIAlertController.Style.alert)
@@ -106,25 +135,44 @@ class ClockController: UIViewController {
         _ = navigationController?.popViewController(animated: true)
     }
     
+    @objc func loadRepeatDaysView(_ sender: UIButton!) {
+        let element = clocks.first(where: {$0.id == viewModel.clockId})
+        let index = clocks.firstIndex(of: element!)
+        let tableViewController = RepeatTableViewController(index: index!)
+        navigationController?.pushViewController(tableViewController, animated: true)
+    }
+    
     func deleteClock() {
-//        print("before remove:")
-//        print(clocks)
         let element = clocks.first(where: {$0.id == viewModel.clockId})
         let index = clocks.firstIndex(of: element!)
         clocks.remove(at: index!)
-//        print("after remove:")
-//        print(clocks)
     }
     
-    @objc func saveButtonPressed() {
-        clocks[viewModel.clockId].name = nameTextField.text!
-        writeToFile(location: subUrl!)
-        title = clocks[viewModel.clockId].name
-        viewModel.collectionView.reloadData()
-    }
+//    @objc func saveButtonPressed() {
+//        clocks[viewModel.clockId].name = nameTextField.text!
+//        writeToFile(location: subUrl!)
+//        title = clocks[viewModel.clockId].name
+//        viewModel.collectionView.reloadData()
+//    }
+    
+//    @objc func editTapped(_ sender:UIViewController!) {
+//        let alertController:UIAlertController = UIAlertController(title: "Edit Title", message: nil, preferredStyle: UIAlertController.Style.alert)
+//
+//        alertController.addTextField { (textField) in
+//            textField.text = clocks[self.currentIndex!].name
+//        }
+//
+//        alertController.addAction(UIAlertAction(title: "Save", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+//            clocks[self.viewModel.clockId].name = alertController.textFields![0].text!
+//            self.editNameSave()
+//            }))
+//
+//        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:nil))
+//        present(alertController, animated: true, completion: nil)
+//    }
 
 
-
+    private var currentIndex: Int?
     
     private let viewModel: ClockViewModel
     
@@ -142,9 +190,16 @@ class ClockController: UIViewController {
 
         let element = clocks.first(where: {$0.id == viewModel.clockId})
         let index = clocks.firstIndex(of: element!)
-//        print("index: \(index!)")
-        nameTextField.text = clocks[index!].name
+        self.currentIndex = index!
         title = clocks[index!].name
+        
+        
+        // (navigation bar button)
+//        let btnEdit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
+//        navigationItem.rightBarButtonItem = btnEdit
+
+        
+        
         setupView()
     }
     
@@ -159,15 +214,14 @@ class ClockController: UIViewController {
     
         
         containerView.addSubviews([
-            alarmLabel,
             timePicker,
             dateLabelFrom,
             dateLabelTo,
             datePickerFrom,
             datePickerTo,
             internDeleteButton,
-            saveButton,
-            nameTextField
+            editNameButton,
+            repeatDaysButton
         ])
     
         
@@ -177,17 +231,15 @@ class ClockController: UIViewController {
             containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
          
-            alarmLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            alarmLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 48),
-            alarmLabel.rightAnchor.constraint(equalTo: datePickerFrom.leftAnchor, constant: -8),
             
-            timePicker.centerYAnchor.constraint(equalTo: alarmLabel.centerYAnchor),
-            timePicker.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
+//            timePicker.centerYAnchor.constraint(equalTo: alarmLabel.centerYAnchor),
+            timePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            timePicker.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
             timePicker.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 48),
             timePicker.heightAnchor.constraint(equalToConstant: 44),
             
             dateLabelFrom.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            dateLabelFrom.topAnchor.constraint(equalTo: alarmLabel.bottomAnchor, constant: 48),
+            dateLabelFrom.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 48),
             dateLabelFrom.rightAnchor.constraint(equalTo: datePickerFrom.leftAnchor, constant: -8),
    
             dateLabelTo.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
@@ -204,17 +256,22 @@ class ClockController: UIViewController {
             datePickerTo.heightAnchor.constraint(equalToConstant: 44),
             datePickerTo.widthAnchor.constraint(equalToConstant: 127),
             
+            
+            editNameButton.topAnchor.constraint(equalTo: dateLabelFrom.bottomAnchor, constant: 96),
+            editNameButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            editNameButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+            editNameButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
+            
+            repeatDaysButton.topAnchor.constraint(equalTo: editNameButton.bottomAnchor, constant: 16),
+            repeatDaysButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            repeatDaysButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+            repeatDaysButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
+            
             internDeleteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            internDeleteButton.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -96),
+            internDeleteButton.topAnchor.constraint(equalTo: repeatDaysButton.bottomAnchor, constant: 16),
+            internDeleteButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+            internDeleteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
             
-            nameTextField.topAnchor.constraint(equalTo: dateLabelFrom.bottomAnchor, constant: 96),
-            nameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            nameTextField.heightAnchor.constraint(equalToConstant: 40),
-            nameTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 64),
-            nameTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -64),
-            
-            saveButton.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10),
-            saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
 
         ])
     }

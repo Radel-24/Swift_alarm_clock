@@ -61,7 +61,7 @@ class StartController: UIViewController {
         if (clocks.count > 0) {
             newID = clocks[clocks.count - 1].id + 1
         }
-        clocks.append(techstack_swift.Clock(id: newID, name: "New Alarm", daysOfWeek: [0]))
+        clocks.append(techstack_swift.Clock(id: newID, name: "New Alarm", daysOfWeek: [0], selectedDays: [false, false, false, false, false, false, false]))
     }
     
     

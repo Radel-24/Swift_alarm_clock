@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class ClockViewModel {
-    private let clock: Clock
+    let clock: Clock
     let collectionView: UICollectionView
 
 

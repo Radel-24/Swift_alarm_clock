@@ -11,6 +11,7 @@ struct Clock: Codable, Identifiable, Hashable {
     var id: Int
     var name: String
     var daysOfWeek: [Int]
+    var selectedDays: [Bool]
 }
 
 
