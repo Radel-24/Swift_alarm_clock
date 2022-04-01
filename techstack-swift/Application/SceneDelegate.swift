@@ -45,6 +45,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
     }
+    
+    private func removeClocksInPast() {
+        print(Date.init())
+        for clock in clocks {
+            for date in clock.ringDays {
+                if (date < Date.init()){
+                    let indexClock = clocks.firstIndex(where: {$0.id == clock.id})
+                    let indexDate = clocks[indexClock!].ringDays.firstIndex(where: {$0 == date})
+                    clocks[indexClock!].ringDays.remove(at: indexDate!)
+                }
+            }
+        }
+        writeToFile(location: subUrl!)
+    }
 
     private func setNextClocks() {
         for var clock in clocks {
@@ -62,9 +76,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         center.requestAuthorization(options: [.alert, .badge, .sound]){(granted, error) in
             if granted {
-                print("good")
+                print("User notifications were granted")
             } else {
-                print("bad")
+                print("User notifications not granted")
             }
         }
     }
@@ -75,11 +89,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         center.removeDeliveredNotifications(withIdentifiers: [clock.notificationId])
     }
     
+    private func findNextRingDate(ringDates: [Date]) -> DateComponents {
+        
+        var nextDate = ringDates[0]
+        for date in ringDates {
+            if (date < nextDate) {
+                nextDate = date
+            }
+        }
+        print("next date \(nextDate)")
+        let retDate = Calendar.current.dateComponents([.year, .month, .day], from: nextDate)
+        return retDate
+    }
+    
     private func scheduleClock(clock: inout Clock) {
+        
         let center = UNUserNotificationCenter.current()
+        
+        center.removeDeliveredNotifications(withIdentifiers: [clock.notificationId])
+        if (clock.ringDays.isEmpty) { return }
+        let nextDate = findNextRingDate(ringDates: clock.ringDays)
+        // TODO find next ring date an put it to ring date
+        let ringDate = DateComponents(calendar: Calendar.current, year: nextDate.year, month: nextDate.month, day: (nextDate.day! - 1), hour: clock.ringTime.hour, minute: clock.ringTime.minute)
+        print(ringDate)
 
-//        let trigger = UNCalendarNotificationTrigger(dateMatching: ringTime, repeats: false)
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: ringDate, repeats: false)
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
 
         let content = UNMutableNotificationContent()
         content.title = clock.name
@@ -88,6 +123,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         content.userInfo = ["Id": 7]
 //        content.sound = UNNotificationSound.default
 
+        
+        
         clock.notificationId = UUID().uuidString
         
         let request = UNNotificationRequest(identifier: clock.notificationId, content: content, trigger: trigger)
@@ -101,7 +138,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
+        removeClocksInPast()
         setNextClocks()
+        
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.

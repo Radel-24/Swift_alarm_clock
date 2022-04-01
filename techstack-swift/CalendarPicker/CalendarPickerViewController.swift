@@ -130,6 +130,22 @@ class CalendarPickerViewController: UIViewController {
     return dateFormatter
   }()
     
+    private func setDays() {
+        let indexClock = clocks.firstIndex(where: {$0.id == clockId})
+        for day in days {
+            for ringDay in clocks[indexClock!].ringDays {
+                let dayForm = Calendar.current.dateComponents([.year, .month, .day], from: day.date)
+                let ringDayForm = Calendar.current.dateComponents([.year, .month, .day], from: ringDay)
+                if (dayForm == ringDayForm) {
+                    let daysIndex = days.firstIndex(where: {$0.date == day.date})
+                    days[daysIndex!].isSelected = true
+                    print("ADDED")
+                    break
+                }
+            }
+        }
+    }
+    
     private let clockId: UUID
 
   // MARK: Initializers
@@ -139,8 +155,12 @@ class CalendarPickerViewController: UIViewController {
     self.baseDate = baseDate
     self.selectedDateChanged = selectedDateChanged
         self.clockId = clockId
-
+    
+        
+        
     super.init(nibName: nil, bundle: nil)
+        
+        self.setDays()
 
     modalPresentationStyle = .overCurrentContext
     modalTransitionStyle = .crossDissolve
