@@ -131,6 +131,33 @@ class CalendarPickerViewController: UIViewController {
   }()
     
     private let clockId: UUID
+    
+    
+    // CONTINUE HERE !!!!!!!!!!!! 
+    private func setDays() {
+
+        let indexClock = clocks.firstIndex(where: {$0.id == clockId})
+        
+        var tempRingDays: [String] = []
+        
+        for element in clocks[indexClock!].ringDays {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            let day = dateFormatter.string(from: element)
+            tempRingDays.append(day)
+        }
+        
+        for day in days {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            let formattedDay = dateFormatter.string(from: day.date)
+            
+            if (tempRingDays.contains(formattedDay)) {
+                let daysIndex = days.firstIndex(where: {$0.date == day.date})
+                days[daysIndex!].isSelected = true
+            }
+        }
+    }
 
   // MARK: Initializers
 
@@ -141,6 +168,7 @@ class CalendarPickerViewController: UIViewController {
         self.clockId = clockId
 
     super.init(nibName: nil, bundle: nil)
+        
 
     modalPresentationStyle = .overCurrentContext
     modalTransitionStyle = .crossDissolve
@@ -207,6 +235,7 @@ class CalendarPickerViewController: UIViewController {
     collectionView.dataSource = self
     collectionView.delegate = self
     headerView.baseDate = baseDate
+    setDays()
   }
 
   override func viewWillTransition(
@@ -376,6 +405,7 @@ extension CalendarPickerViewController: UICollectionViewDelegateFlowLayout {
     didSelectItemAt indexPath: IndexPath
   ) {
 //    let day = days[indexPath.row]
+    setDays()
     if (days[indexPath.row].isSelected) {
         days[indexPath.row].isSelected = false
     } else {

@@ -80,6 +80,55 @@ class RepeatTableViewController: UITableViewController {
         
         writeToFile(location: subUrl!)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+
+        let calendar = Calendar(identifier: .gregorian)
+        
+//        let todaysWeekdayIndex = calendar.component(.weekday, from: Date())
+        
+        var i = 1
+        var weekdaysToActivate: [Int] = []
+        for state in clocks[currentClockIndex].selectedDays {
+            if (state == true) {
+                weekdaysToActivate.append(i)
+            }
+            i += 1
+        }
+        
+        let today = Date()
+       
+        
+//        print("todays day: \(day ?? <#default value#>)")
+//        print("todays date: \(date)")
+//        print("friday: \(todaysWeekdayIndex)")
+        print(weekdaysToActivate)
+        print("\n")
+        
+        
+        for index in 0...100 {
+            let checkDate = today.advanced(by: TimeInterval((index * 3600 * 24)))
+            let weekIndex = calendar.component(.weekday, from: checkDate)
+            if (weekdaysToActivate.contains(weekIndex)) {
+                clocks[currentClockIndex].ringDays.append(checkDate)
+            }
+        }
+        writeToFile(location: subUrl!)
+        
+        print(clocks[currentClockIndex].ringDays)
+        
+//        if (weekdaysToActivate.count > 0) {
+//            for each in weekdaysToActivate {
+//                let diff = day! - each
+//            }
+//        }
+        
+        
+//        print(clocks[currentClockIndex].selectedDays)
+//        print("date: \(date)")
+
+//        print(todaysWeekday)
+    }
 
     /*
     // Override to support conditional editing of the table view.

@@ -122,7 +122,6 @@ private extension CalendarDateCollectionViewCell {
   // 1
   func updateSelectionStatus() {
     guard let day = day else { return }
-
     if day.isSelected {
       applySelectedStyle()
     } else {

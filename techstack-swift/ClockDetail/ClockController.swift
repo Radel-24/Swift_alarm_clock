@@ -224,12 +224,8 @@ class ClockController: UIViewController {
             containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
          
-//            timePicker.centerYAnchor.constraint(equalTo: alarmLabel.centerYAnchor),
             timePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            timePicker.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
-            timePicker.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 48),
-            timePicker.heightAnchor.constraint(equalToConstant: 48),
-            
+            timePicker.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 96),
             
             editNameButton.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 96),
             editNameButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -251,8 +247,6 @@ class ClockController: UIViewController {
             internDeleteButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
             internDeleteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
             
-        
-
         ])
     }
 }
