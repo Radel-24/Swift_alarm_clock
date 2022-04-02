@@ -50,7 +50,7 @@
 		0B5EBDF827F6DDBB00577EC7 /* MonthMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthMetadata.swift; sourceTree = "<group>"; };
 		BD1C881727EDBA8F005A8A58 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		BD1C882027EDCFDB005A8A58 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
-		BD3BF26E27EB754100E28212 /* techstack-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "techstack-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD3BF26E27EB754100E28212 /* myClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD3BF27127EB754100E28212 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD3BF27327EB754100E28212 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BD3BF27527EB754100E28212 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 		BD3BF26527EB754100E28212 = {
 			isa = PBXGroup;
 			children = (
-				BD3BF27027EB754100E28212 /* techstack-swift */,
+				BD3BF27027EB754100E28212 /* myClock */,
 				BD3BF26F27EB754100E28212 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -117,12 +117,12 @@
 		BD3BF26F27EB754100E28212 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BD3BF26E27EB754100E28212 /* techstack-swift.app */,
+				BD3BF26E27EB754100E28212 /* myClock.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BD3BF27027EB754100E28212 /* techstack-swift */ = {
+		BD3BF27027EB754100E28212 /* myClock */ = {
 			isa = PBXGroup;
 			children = (
 				080C30DF27F70BDF00866F7E /* RepeatDays */,
@@ -136,7 +136,7 @@
 				BD3BF27C27EB754200E28212 /* LaunchScreen.storyboard */,
 				BD3BF27F27EB754200E28212 /* Info.plist */,
 			);
-			path = "techstack-swift";
+			path = myClock;
 			sourceTree = "<group>";
 		};
 		BD3BF29627EB9BB900E28212 /* Data */ = {
@@ -186,9 +186,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BD3BF26D27EB754100E28212 /* techstack-swift */ = {
+		BD3BF26D27EB754100E28212 /* myClock */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BD3BF28227EB754200E28212 /* Build configuration list for PBXNativeTarget "techstack-swift" */;
+			buildConfigurationList = BD3BF28227EB754200E28212 /* Build configuration list for PBXNativeTarget "myClock" */;
 			buildPhases = (
 				BD3BF26A27EB754100E28212 /* Sources */,
 				BD3BF26B27EB754100E28212 /* Frameworks */,
@@ -198,9 +198,9 @@
 			);
 			dependencies = (
 			);
-			name = "techstack-swift";
+			name = myClock;
 			productName = "techstack-swift";
-			productReference = BD3BF26E27EB754100E28212 /* techstack-swift.app */;
+			productReference = BD3BF26E27EB754100E28212 /* myClock.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -230,7 +230,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BD3BF26D27EB754100E28212 /* techstack-swift */,
+				BD3BF26D27EB754100E28212 /* myClock */,
 			);
 		};
 /* End PBXProject section */
@@ -416,13 +416,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6KH8F5FR45;
-				INFOPLIST_FILE = "techstack-swift/Info.plist";
+				INFOPLIST_FILE = myClock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--generate-entitlement-der";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.schwarzit.techstack-swift";
+				PRODUCT_BUNDLE_IDENTIFIER = com.AlexRobin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -436,13 +436,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6KH8F5FR45;
-				INFOPLIST_FILE = "techstack-swift/Info.plist";
+				INFOPLIST_FILE = myClock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--generate-entitlement-der";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.schwarzit.techstack-swift";
+				PRODUCT_BUNDLE_IDENTIFIER = com.AlexRobin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -461,7 +461,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BD3BF28227EB754200E28212 /* Build configuration list for PBXNativeTarget "techstack-swift" */ = {
+		BD3BF28227EB754200E28212 /* Build configuration list for PBXNativeTarget "myClock" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BD3BF28327EB754200E28212 /* Debug */,

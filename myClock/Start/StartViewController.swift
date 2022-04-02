@@ -23,7 +23,7 @@ class StartController: UIViewController {
         setupCollectionView()
 
         navigationController?.navigationBar.prefersLargeTitles = true
-        title = "LightAlarmClock"
+        title = "My Clock"
         view.backgroundColor = .lightGray
         navigationController?.navigationBar.barStyle = .default
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
@@ -58,7 +58,7 @@ class StartController: UIViewController {
     
     func addClock() {
         let newID = UUID.init()
-        clocks.append(techstack_swift.Clock(id: newID, name: "New Alarm", daysOfWeek: [0], ringDays: [], isActivated: true, ringTime: DateComponents.init(), notificationId: UUID().uuidString, selectedDays: [false, false, false, false, false, false, false]))
+        clocks.append(myClock.Clock(id: newID, name: "New Alarm", daysOfWeek: [0], ringDays: [], isActivated: true, ringTime: Calendar.current.dateComponents([.hour, .minute], from: Date.init()), notificationId: UUID().uuidString, selectedDays: [false, false, false, false, false, false, false]))
     }
     
     
