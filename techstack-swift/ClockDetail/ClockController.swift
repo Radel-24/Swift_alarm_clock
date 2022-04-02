@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class ClockController: UIViewController {
 
@@ -209,8 +210,12 @@ class ClockController: UIViewController {
     private func setupView() {
         view.backgroundColor = .lightGray
         setupCollectionView()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        let clockIndex = clocks.firstIndex(where: {$0.id == viewModel.clockId})
+        let timer = String(clocks[clockIndex!].ringTime.hour!) + ":" + String(clocks[clockIndex!].ringTime.minute!)
+        timePicker.date = dateFormatter.date(from: timer)!
     }
-
 
     private func setupCollectionView() {
         view.addSubview(containerView)
@@ -235,26 +240,32 @@ class ClockController: UIViewController {
             timePicker.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 96),
 
             editNameButton.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 96),
-            editNameButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            editNameButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             editNameButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
             editNameButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
 
             repeatDaysButton.topAnchor.constraint(equalTo: editNameButton.bottomAnchor, constant: 16),
-            repeatDaysButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            repeatDaysButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             repeatDaysButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
             repeatDaysButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
 
             calendarButton.topAnchor.constraint(equalTo: repeatDaysButton.bottomAnchor, constant: 16),
-            calendarButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            calendarButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             calendarButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
             calendarButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
 
-            internDeleteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            internDeleteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             internDeleteButton.topAnchor.constraint(equalTo: calendarButton.bottomAnchor, constant: 16),
             internDeleteButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            internDeleteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
+            internDeleteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16)
 
         ])
     }
 }
 
+
+//struct ClockController_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Text("Hello, World!")
+//    }
+//}

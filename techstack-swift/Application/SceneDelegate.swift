@@ -48,9 +48,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func removeClocksInPast() {
         print(Date.init())
+        let today = Calendar.current.dateComponents([.year, .month, .day], from: Date.init())
+        print("today\(today)")
         for clock in clocks {
             for date in clock.ringDays {
-                if (date < Date.init()){
+                if (date < today){
                     let indexClock = clocks.firstIndex(where: {$0.id == clock.id})
                     let indexDate = clocks[indexClock!].ringDays.firstIndex(where: {$0 == date})
                     clocks[indexClock!].ringDays.remove(at: indexDate!)
@@ -89,7 +91,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         center.removeDeliveredNotifications(withIdentifiers: [clock.notificationId])
     }
     
-    private func findNextRingDate(ringDates: [Date]) -> DateComponents {
+    private func findNextRingDate(ringDates: [DateComponents]) -> DateComponents {
         
         var nextDate = ringDates[0]
         for date in ringDates {
@@ -98,8 +100,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }
         print("next date \(nextDate)")
-        let retDate = Calendar.current.dateComponents([.year, .month, .day], from: nextDate)
-        return retDate
+
+        return nextDate
     }
     
     private func scheduleClock(clock: inout Clock) {
@@ -110,7 +112,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if (clock.ringDays.isEmpty) { return }
         let nextDate = findNextRingDate(ringDates: clock.ringDays)
         // TODO find next ring date an put it to ring date
-        let ringDate = DateComponents(calendar: Calendar.current, year: nextDate.year, month: nextDate.month, day: (nextDate.day! - 1), hour: clock.ringTime.hour, minute: clock.ringTime.minute)
+        let ringDate = DateComponents(calendar: Calendar.current, year: nextDate.year, month: nextDate.month, day: nextDate.day, hour: clock.ringTime.hour, minute: clock.ringTime.minute)
         print(ringDate)
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: ringDate, repeats: false)

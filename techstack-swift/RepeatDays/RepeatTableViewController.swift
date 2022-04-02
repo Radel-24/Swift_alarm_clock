@@ -15,6 +15,7 @@ class RepeatTableViewController: UITableViewController {
     init(index: Int) {
         
         self.currentClockIndex = index
+        self.weekdaysToActivate = []
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -22,8 +23,38 @@ class RepeatTableViewController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+//    @objc func backAction(sender: UIBarButtonItem) {
+//
+////        let alertController = UIAlertController(title: "Are You Sure?", message: "If You Proceed, All Data On This Page Will Be Lost", preferredStyle: .alert)
+////        let okAction = UIAlertAction(title: "Ok", style: .default) { (result : UIAlertAction) -> Void in
+////            self.navigationController?.popViewController(animated: true)
+////        }
+////
+////        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+////        alertController.addAction(cancelAction)
+////        alertController.addAction(okAction)
+////        self.present(alertController, animated: true)
+//        overrideAlertMessage()
+//        self.navigationController?.popViewController(animated: true)
+//    }
+    
+    
+    
+//    @objc func back(sender: UIBarButtonItem) {
+//
+//        getRingDays()
+//        setRingDays()
+//        writeToFile(location: subUrl!)
+//        overrideAlertMessage()
+////        _ = navigationController?.popViewController(animated: true)
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        self.navigationItem.hidesBackButton = true
+//        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.backAction(sender:)))
+//        self.navigationItem.leftBarButtonItem = newBackButton
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "dayCell")
 
@@ -33,6 +64,52 @@ class RepeatTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+//    private func setRingDays() {
+//        let indexClock = clocks.firstIndex(where: {$0.id == clockId})
+//        for day in days {
+//            for ringDay in clocks[indexClock!].ringDays {
+//                let dayForm = Calendar.current.dateComponents([.year, .month, .day], from: day.date)
+//                let ringDayForm = Calendar.current.dateComponents([.year, .month, .day], from: ringDay)
+//                if (dayForm == ringDayForm) {
+//                    let daysIndex = days.firstIndex(where: {$0.date == day.date})
+//                    days[daysIndex!].isSelected = true
+//                    print("ADDED")
+//                    break
+//                }
+//            }
+//        }
+//    }
+    
+    
+
+    
+    
+    // CONTINUE HERE !!!!!!!!!!!!
+//    private func setRingDays() {
+//
+//        let indexClock = clocks.firstIndex(where: {$0.id == clockId})
+//
+//        var tempRingDays: [String] = []
+//
+//        for element in clocks[indexClock!].ringDays {
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "dd.MM.yyyy"
+//            let day = dateFormatter.string(from: element)
+//            tempRingDays.append(day)
+//        }
+//
+//        for day in days {
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "dd.MM.yyyy"
+//            let formattedDay = dateFormatter.string(from: day.date)
+//
+//            if (tempRingDays.contains(formattedDay)) {
+//                let daysIndex = days.firstIndex(where: {$0.date == day.date})
+//                days[daysIndex!].isSelected = true
+//            }
+//        }
+//    }
     
 
     // MARK: - Table view data source
@@ -81,55 +158,53 @@ class RepeatTableViewController: UITableViewController {
         writeToFile(location: subUrl!)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-
-        let calendar = Calendar(identifier: .gregorian)
-        
-//        let todaysWeekdayIndex = calendar.component(.weekday, from: Date())
-        
+    private func getRingDays() {
         var i = 1
-        var weekdaysToActivate: [Int] = []
         for state in clocks[currentClockIndex].selectedDays {
             if (state == true) {
                 weekdaysToActivate.append(i)
             }
             i += 1
         }
-        
-        let today = Date()
-       
-        
-//        print("todays day: \(day ?? <#default value#>)")
-//        print("todays date: \(date)")
-//        print("friday: \(todaysWeekdayIndex)")
-        print(weekdaysToActivate)
-        print("\n")
-        
+    }
+    
+    private func setRingDays() {
+        let todaysIndex = Calendar.current.dateComponents([.weekday], from: Date.init()).weekday
         
         for index in 0...100 {
-            let checkDate = today.advanced(by: TimeInterval((index * 3600 * 24)))
-            let weekIndex = calendar.component(.weekday, from: checkDate)
-            if (weekdaysToActivate.contains(weekIndex)) {
-                clocks[currentClockIndex].ringDays.append(checkDate)
+            let checkIndex = (todaysIndex! + index) % 7 + 1
+            let checkDate = toDateComponent(date: Date.init().advanced(by: TimeInterval((index * 3600 * 24))))
+
+            if (weekdaysToActivate.contains(checkIndex)) {
+                if (!clocks[currentClockIndex].ringDays.contains(checkDate)) {
+                    clocks[currentClockIndex].ringDays.append(checkDate)
+                }
             }
         }
-        writeToFile(location: subUrl!)
-        
-        print(clocks[currentClockIndex].ringDays)
-        
-//        if (weekdaysToActivate.count > 0) {
-//            for each in weekdaysToActivate {
-//                let diff = day! - each
-//            }
-//        }
-        
-        
-//        print(clocks[currentClockIndex].selectedDays)
-//        print("date: \(date)")
-
-//        print(todaysWeekday)
     }
+    
+    var weekdaysToActivate: [Int]
+    
+//    private func overrideAlertMessage() {
+//        let alertController:UIAlertController = UIAlertController(title: "Override", message: "Settings will be overwritten", preferredStyle: UIAlertController.Style.alert)
+//
+//        alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.destructive, handler: { (action: UIAlertAction!) in
+//            clocks[self.currentClockIndex].ringDays = []
+//            self.setRingDays()
+//            }))
+//        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:nil))
+//        present(alertController, animated: true, completion: nil)
+//    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
 
+        getRingDays()
+        clocks[currentClockIndex].ringDays = []
+        setRingDays()
+//        overrideAlertMessage()
+        writeToFile(location: subUrl!)
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
