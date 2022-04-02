@@ -47,9 +47,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func removeClocksInPast() {
-        print(Date.init())
         let today = Calendar.current.dateComponents([.year, .month, .day], from: Date.init())
-        print("today\(today)")
         for clock in clocks {
             for date in clock.ringDays {
                 if (date < today){
@@ -63,11 +61,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func setNextClocks() {
-        for var clock in clocks {
+        for clock in clocks {
             if (clock.isActivated) {
-                scheduleClock(clock: &clock)
+                scheduleClock(clockId: clock.id)
             } else {
-                unscheduleClock(clock: &clock)
+//                unscheduleClock(clockId: clock.id)
             }
         }
         writeToFile(location: subUrl!)
@@ -85,10 +83,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
     
-    private func unscheduleClock(clock: inout Clock) {
-        let center = UNUserNotificationCenter.current()
-        
-        center.removeDeliveredNotifications(withIdentifiers: [clock.notificationId])
+//    private func unscheduleClock(clockId: UUID) {
+//        let center = UNUserNotificationCenter.current()
+//        let clockIndex = clocks.firstIndex(where: {$0.id == clockId})
+//
+//        center.removePendingNotificationRequests(withIdentifiers: [clocks[clockIndex!].notificationId])
+//    }
+    
+    private func unscheduleAllClocks() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
     
     private func findNextRingDate(ringDates: [DateComponents]) -> DateComponents {
@@ -104,11 +108,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         return nextDate
     }
     
-    private func scheduleClock(clock: inout Clock) {
+    private func scheduleClock(clockId: UUID) {
+        
+        let clockIndex = clocks.firstIndex(where: {$0.id == clockId})
+        let clock = clocks[clockIndex!]
         
         let center = UNUserNotificationCenter.current()
         
-        center.removeDeliveredNotifications(withIdentifiers: [clock.notificationId])
+//        center.removeDeliveredNotifications(withIdentifiers: [clock.notificationId])
+//        center.removePendingNotificationRequests(withIdentifiers: [clock.notificationId])
         if (clock.ringDays.isEmpty) { return }
         let nextDate = findNextRingDate(ringDates: clock.ringDays)
         // TODO find next ring date an put it to ring date
@@ -116,18 +124,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         print(ringDate)
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: ringDate, repeats: false)
-//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
 
         let content = UNMutableNotificationContent()
         content.title = clock.name
         content.body = "get up now you lazy bastard!!!"
         content.categoryIdentifier = "myIdentifier"
         content.userInfo = ["Id": 7]
-//        content.sound = UNNotificationSound.default
+        content.sound = UNNotificationSound.defaultCritical
 
         
         
-        clock.notificationId = UUID().uuidString
+        clocks[clockIndex!].notificationId = UUID().uuidString
         
         let request = UNNotificationRequest(identifier: clock.notificationId, content: content, trigger: trigger)
         center.add(request)
@@ -141,6 +148,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func sceneDidEnterBackground(_ scene: UIScene) {
         removeClocksInPast()
+        unscheduleAllClocks()
         setNextClocks()
         
         // Called as the scene transitions from the foreground to the background.
