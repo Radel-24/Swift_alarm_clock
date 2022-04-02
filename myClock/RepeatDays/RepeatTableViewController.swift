@@ -184,17 +184,15 @@ class RepeatTableViewController: UITableViewController {
     private func setRingDays() {
         let todaysIndex = Calendar.current.dateComponents([.weekday], from: Date.init()).weekday
         
-        print("todaysIndex: \(todaysIndex!)")
-        print("weekdaysToActivate: \(weekdaysToActivate)")
+        let begin = 1 - todaysIndex!
+        let beginDate = Date.init().advanced(by: TimeInterval((begin * 3600 * 24)))
         
         for index in 0...100 {
-            let checkIndex = (index % 7) - todaysIndex!
-            if (index < 10) {
-                print("checkIndex: \(checkIndex)")
-            }
-            let checkDate = toDateComponent(date: Date.init().advanced(by: TimeInterval((index * 3600 * 24))))
+            let checkIndex = index % 7
+            let checkDate = toDateComponent(date: beginDate.advanced(by: TimeInterval((index * 3600 * 24))))
+            
 
-            if (weekdaysToActivate.contains(checkIndex)) {
+            if (weekdaysToActivate.contains(checkIndex + 1)) {
                 if (!clocks[currentClockIndex].ringDays.contains(checkDate)) {
                     clocks[currentClockIndex].ringDays.append(checkDate)
                 }
