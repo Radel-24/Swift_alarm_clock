@@ -10,7 +10,7 @@ import UIKit
 
 class RepeatTableViewModel {
 //    let tableView: UITableView
-    var repeatDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    var repeatDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     var selectedDays = [false, false, false, false, false, false, false]
     
 //    var clock: Clock
