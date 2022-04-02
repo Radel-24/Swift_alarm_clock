@@ -11,11 +11,13 @@ class RepeatTableViewController: UITableViewController {
 
     let viewModel = RepeatTableViewModel()
     let currentClockIndex: Int
+    let backupSelectedDays: [Bool]
     
     init(index: Int) {
         
         self.currentClockIndex = index
         self.weekdaysToActivate = []
+        self.backupSelectedDays = clocks[currentClockIndex].selectedDays
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -23,20 +25,29 @@ class RepeatTableViewController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    @objc func backAction(sender: UIBarButtonItem) {
-//
-////        let alertController = UIAlertController(title: "Are You Sure?", message: "If You Proceed, All Data On This Page Will Be Lost", preferredStyle: .alert)
-////        let okAction = UIAlertAction(title: "Ok", style: .default) { (result : UIAlertAction) -> Void in
-////            self.navigationController?.popViewController(animated: true)
-////        }
-////
-////        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-////        alertController.addAction(cancelAction)
-////        alertController.addAction(okAction)
-////        self.present(alertController, animated: true)
+    @objc func backAction(sender: UIBarButtonItem) {
+
+        let alertController = UIAlertController(title: "Are You Sure?", message: "If You Proceed, The Calendar data will be overriden", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default) { (result : UIAlertAction) -> Void in
+            self.getRingDays()
+            clocks[self.currentClockIndex].ringDays = []
+            self.setRingDays()
+            writeToFile(location: subUrl!)
+            self.navigationController?.popViewController(animated: true)
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result : UIAlertAction) -> Void in
+            clocks[self.currentClockIndex].selectedDays = self.backupSelectedDays
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true)
 //        overrideAlertMessage()
 //        self.navigationController?.popViewController(animated: true)
-//    }
+    }
     
     
     
@@ -52,9 +63,9 @@ class RepeatTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.navigationItem.hidesBackButton = true
-//        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.backAction(sender:)))
-//        self.navigationItem.leftBarButtonItem = newBackButton
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.done, target: self, action: #selector(self.backAction(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "dayCell")
 
@@ -141,6 +152,8 @@ class RepeatTableViewController: UITableViewController {
         // Unselect the row.
         tableView.deselectRow(at: indexPath, animated: false)
         
+
+        
         // remove the checkmark
         if (clocks[currentClockIndex].selectedDays[indexPath.row] == true) {
             let cell = tableView.cellForRow(at: indexPath)
@@ -155,7 +168,7 @@ class RepeatTableViewController: UITableViewController {
             clocks[currentClockIndex].selectedDays[indexPath.row] = true
         }
         
-        writeToFile(location: subUrl!)
+//        writeToFile(location: subUrl!)
     }
     
     private func getRingDays() {
@@ -171,8 +184,14 @@ class RepeatTableViewController: UITableViewController {
     private func setRingDays() {
         let todaysIndex = Calendar.current.dateComponents([.weekday], from: Date.init()).weekday
         
+        print("todaysIndex: \(todaysIndex!)")
+        print("weekdaysToActivate: \(weekdaysToActivate)")
+        
         for index in 0...100 {
-            let checkIndex = (todaysIndex! + index) % 7 + 1
+            let checkIndex = (index % 7) - todaysIndex!
+            if (index < 10) {
+                print("checkIndex: \(checkIndex)")
+            }
             let checkDate = toDateComponent(date: Date.init().advanced(by: TimeInterval((index * 3600 * 24))))
 
             if (weekdaysToActivate.contains(checkIndex)) {
@@ -199,11 +218,11 @@ class RepeatTableViewController: UITableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
 
-        getRingDays()
-        clocks[currentClockIndex].ringDays = []
-        setRingDays()
-//        overrideAlertMessage()
-        writeToFile(location: subUrl!)
+//        getRingDays()
+//        clocks[currentClockIndex].ringDays = []
+//        setRingDays()
+////        overrideAlertMessage()
+//        writeToFile(location: subUrl!)
     }
     /*
     // Override to support conditional editing of the table view.
