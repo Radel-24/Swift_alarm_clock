@@ -9,6 +9,7 @@ import Foundation
 
 var clocks: [Clock] = []
 var subUrl: URL?
+var cells: [ClockCell] = []
 
 class StartViewModel {
     let fm = FileManager.default

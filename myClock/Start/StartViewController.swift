@@ -19,18 +19,24 @@ class StartController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        cells.removeAll()
 
         setupCollectionView()
 
         navigationController?.navigationBar.prefersLargeTitles = true
-        title = "My Clock"
-        view.backgroundColor = .lightGray
+        title = "myClock"
+        view.backgroundColor = .black
         navigationController?.navigationBar.barStyle = .default
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         let btnAdd = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
-        btnAdd.tintColor = .black
+//        btnAdd.tintColor = .green
         navigationItem.rightBarButtonItem = btnAdd
+        
+
+    
+    
         
 //        let btnEdit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
 //        btnEdit.tintColor = .black
@@ -65,7 +71,7 @@ class StartController: UIViewController {
         collectionView.register(ClockCell.self, forCellWithReuseIdentifier: "ClockCell")
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = .lightGray
+        collectionView.backgroundColor = .black
         collectionView.alwaysBounceVertical = true
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
 
@@ -82,6 +88,16 @@ class StartController: UIViewController {
 
 extension StartController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+//        let clock = clocks[indexPath.item]
+//        cells[indexPath.item].configureWith(clock)
+//        cells[indexPath.item].switchValueChanged = { switchValue in
+//            print("Switch is \(switchValue)")
+//            clocks[indexPath.item].isActivated = switchValue
+//            writeToFile(location: subUrl!)
+//        }
+//        return cells[indexPath.item]
+        
         guard
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClockCell", for: indexPath) as? ClockCell else { return UICollectionViewCell() }
         let clock = clocks[indexPath.item]
@@ -105,12 +121,27 @@ extension StartController: UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let clock = viewModel.itemAt(indexPath.item) else { return }
         let controller = ClockController(viewModel: ClockViewModel(clock: clock, collectionView: collectionView))
+ 
         
         navigationController?.pushViewController(controller, animated: true)
 //        present(controller, animated: true, completion: nil)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        guard
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClockCell", for: indexPath) as? ClockCell else { return CGSize() }
+//        if (clocks[indexPath.item].isActivated) {
+//            print("ON")
+//            cell.layer.borderColor = UIColor.white.cgColor
+//            cell.nameLabel.textColor = .white
+//        }
+//        else {
+//            print("OFF")
+//            cell.layer.borderColor = UIColor.darkGray.cgColor
+//            cell.nameLabel.textColor = .lightGray
+//        }
+//        cells.append(cell)
         return CGSize(width: collectionView.bounds.width - 32, height: 80)
+        
     }
 }

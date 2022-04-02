@@ -11,35 +11,52 @@ class RepeatTableViewController: UITableViewController {
 
     let viewModel = RepeatTableViewModel()
     let currentClockIndex: Int
-    
+    let backupSelectedDays: [Bool]
+
     init(index: Int) {
-        
+
         self.currentClockIndex = index
         self.weekdaysToActivate = []
+        self.backupSelectedDays = clocks[currentClockIndex].selectedDays
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-//    @objc func backAction(sender: UIBarButtonItem) {
-//
-////        let alertController = UIAlertController(title: "Are You Sure?", message: "If You Proceed, All Data On This Page Will Be Lost", preferredStyle: .alert)
-////        let okAction = UIAlertAction(title: "Ok", style: .default) { (result : UIAlertAction) -> Void in
-////            self.navigationController?.popViewController(animated: true)
-////        }
-////
-////        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-////        alertController.addAction(cancelAction)
-////        alertController.addAction(okAction)
-////        self.present(alertController, animated: true)
+
+    @objc func backAction(sender: UIBarButtonItem) {
+
+        let alertController = UIAlertController(title: "Are You Sure?", message: "If You Proceed, The Calendar data will be overriden", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default) { (result : UIAlertAction) -> Void in
+            self.getRingDays()
+            clocks[self.currentClockIndex].ringDays = []
+            self.setRingDays()
+            writeToFile(location: subUrl!)
+            self.navigationController?.popViewController(animated: true)
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (result : UIAlertAction) -> Void in
+            clocks[self.currentClockIndex].selectedDays = self.backupSelectedDays
+            self.navigationController?.popViewController(animated: true)
+        }
+
+
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+
+        if (clocks[self.currentClockIndex].selectedDays != self.backupSelectedDays) {
+            self.present(alertController, animated: true)
+        }
+        else {
+            self.navigationController?.popViewController(animated: true)
+        }
 //        overrideAlertMessage()
 //        self.navigationController?.popViewController(animated: true)
-//    }
-    
-    
-    
+    }
+
+
+
 //    @objc func back(sender: UIBarButtonItem) {
 //
 //        getRingDays()
@@ -48,14 +65,14 @@ class RepeatTableViewController: UITableViewController {
 //        overrideAlertMessage()
 ////        _ = navigationController?.popViewController(animated: true)
 //    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        self.navigationItem.hidesBackButton = true
-//        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.backAction(sender:)))
-//        self.navigationItem.leftBarButtonItem = newBackButton
-        
+
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.done, target: self, action: #selector(self.backAction(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
+
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "dayCell")
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -74,11 +91,11 @@ class RepeatTableViewController: UITableViewController {
         return viewModel.repeatDays.count
     }
 
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "dayCell", for: indexPath)
 
-        
+
         cell.textLabel?.text = viewModel.repeatDays[indexPath.row]
         if (clocks[currentClockIndex].selectedDays[indexPath.row] == true) {
             cell.accessoryType = .checkmark
@@ -86,11 +103,13 @@ class RepeatTableViewController: UITableViewController {
 
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Unselect the row.
         tableView.deselectRow(at: indexPath, animated: false)
-        
+
+
+
         // remove the checkmark
         if (clocks[currentClockIndex].selectedDays[indexPath.row] == true) {
             let cell = tableView.cellForRow(at: indexPath)
@@ -104,7 +123,7 @@ class RepeatTableViewController: UITableViewController {
             clocks[currentClockIndex].selectedDays[indexPath.row] = true
         }
     }
-    
+
     private func getRingDays() {
         var i = 1
         for state in clocks[currentClockIndex].selectedDays {
@@ -114,12 +133,12 @@ class RepeatTableViewController: UITableViewController {
             i += 1
         }
     }
-    
+
     private func setRingDays() {
         let todaysIndex = Calendar.current.dateComponents([.weekday], from: Date.init()).weekday
         let beginShift = 1 - todaysIndex!
         let beginDate = Date.init().advanced(by: TimeInterval((beginShift * 3600 * 24)))
-        
+
         for index in 0...1000 {
             let checkIndex = (index % 7) + 1
             let checkDate = toDateComponent(date: beginDate.advanced(by: TimeInterval((index * 3600 * 24))))
@@ -131,7 +150,7 @@ class RepeatTableViewController: UITableViewController {
             }
         }
     }
-    
+
     private func removeClocksInPast() {
         let today = Calendar.current.dateComponents([.year, .month, .day], from: Date.init())
         for clock in clocks {
@@ -144,10 +163,10 @@ class RepeatTableViewController: UITableViewController {
             }
         }
     }
-    
+
     var weekdaysToActivate: [Int]
-    
-    
+
+
     override func viewWillDisappear(_ animated: Bool) {
 
         getRingDays()

@@ -37,10 +37,10 @@ class ClockController: UIViewController {
 //        btn.setTitleColor(.red, for: .normal)
         btn.addTarget(self, action: #selector(loadRepeatDaysView(_:)), for: .touchUpInside)
 
-        btn.backgroundColor = .white
+//        btn.backgroundColor = .white
         btn.layer.cornerRadius = 5
-        btn.layer.borderWidth = 1
-        btn.layer.borderColor = UIColor.black.cgColor
+//        btn.layer.borderWidth = 1
+//        btn.layer.borderColor = UIColor.black.cgColor
 
         return btn
     }()
@@ -52,10 +52,10 @@ class ClockController: UIViewController {
         btn.setTitleColor(.red, for: .normal)
         btn.addTarget(self, action: #selector(deleteAlertMessage(_:)), for: .touchUpInside)
 
-        btn.backgroundColor = .white
+//        btn.backgroundColor = .white
         btn.layer.cornerRadius = 5
-        btn.layer.borderWidth = 1
-        btn.layer.borderColor = UIColor.black.cgColor
+//        btn.layer.borderWidth = 1
+//        btn.layer.borderColor = UIColor.black.cgColor
 
         return btn
     }()
@@ -63,10 +63,10 @@ class ClockController: UIViewController {
     private let editNameButton: UIButton = {
         let editName = UIButton(type: .system)
 
-        editName.backgroundColor = .white
+//        editName.backgroundColor = .white
         editName.layer.cornerRadius = 5
-        editName.layer.borderWidth = 1
-        editName.layer.borderColor = UIColor.black.cgColor
+//        editName.layer.borderWidth = 1
+//        editName.layer.borderColor = UIColor.black.cgColor
 
         editName.translatesAutoresizingMaskIntoConstraints = false
         editName.setTitle("Edit Title", for: .normal)
@@ -78,10 +78,10 @@ class ClockController: UIViewController {
     private let calendarButton: UIButton = {
         let btn = UIButton(type: .system)
 
-        btn.backgroundColor = .white
+//        btn.backgroundColor = .white
         btn.layer.cornerRadius = 5
-        btn.layer.borderWidth = 1
-        btn.layer.borderColor = UIColor.black.cgColor
+//        btn.layer.borderWidth = 1
+//        btn.layer.borderColor = UIColor.black.cgColor
 
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Calendar View", for: .normal)
@@ -206,7 +206,7 @@ class ClockController: UIViewController {
     }
 
     private func setupView() {
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .black
         setupCollectionView()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
@@ -253,7 +253,7 @@ class ClockController: UIViewController {
             calendarButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
 
 //            internDeleteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            internDeleteButton.topAnchor.constraint(equalTo: calendarButton.bottomAnchor, constant: 16),
+            internDeleteButton.topAnchor.constraint(equalTo: calendarButton.bottomAnchor, constant: 96),
             internDeleteButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
             internDeleteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16)
 

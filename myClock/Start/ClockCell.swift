@@ -8,11 +8,11 @@
 import UIKit
 
 class ClockCell: UICollectionViewCell {
-    private let nameLabel: UILabel = {
+    let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.textColor = .white
+        label.textColor = .lightGray
         label.numberOfLines = 0
 
         return label
@@ -26,7 +26,7 @@ class ClockCell: UICollectionViewCell {
         return imageView
     }()
 
-    private let switchView: UISwitch = {
+    let switchView: UISwitch = {
         let switchDemo = UISwitch()
         switchDemo.translatesAutoresizingMaskIntoConstraints = false // um view selbst zu positieren
         switchDemo.setOn(false, animated: true)
@@ -76,11 +76,15 @@ class ClockCell: UICollectionViewCell {
             print("UISwitch state is now ON")
             defaults.set(true, forKey: key!)
             print(key!)
+            nameLabel.textColor = .white
+            layer.borderColor = UIColor.white.cgColor
         }
         else{
             print("UISwitch state is now Off")
             defaults.set(false, forKey: key!)
             print(key!)
+            nameLabel.textColor = .lightGray
+            layer.borderColor = UIColor.darkGray.cgColor
         }
 //        print(defaults.bool(forKey: "Monday"))
 //        print(defaults.bool(forKey: "Tuesday"))
@@ -91,13 +95,15 @@ class ClockCell: UICollectionViewCell {
     override init(frame: CGRect) {
         
         super.init(frame: frame)
-
+        
         setupView()
+    
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 
 
     private func setupView() {
@@ -107,7 +113,10 @@ class ClockCell: UICollectionViewCell {
 
 
         layer.cornerRadius = 10
-        backgroundColor = .sit_PrimaryLight
+        backgroundColor = .black
+        layer.borderWidth = 1
+    
+        
 
         addSubviews([
             nameLabel,
@@ -139,5 +148,13 @@ class ClockCell: UICollectionViewCell {
         switchView.isOn = clock.isActivated
 //        clockID = clock.id
         chevronImageView.isHidden = chevronHidden
+        if (switchView.isOn) {
+            layer.borderColor = UIColor.white.cgColor
+            nameLabel.textColor = .white
+        }
+        else {
+            layer.borderColor = UIColor.darkGray.cgColor
+            nameLabel.textColor = .lightGray
+        }
     }
 }
