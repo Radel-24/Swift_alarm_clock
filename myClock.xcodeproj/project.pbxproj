@@ -10,6 +10,8 @@
 		080C30E127F70C1A00866F7E /* RepeatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C30E027F70C1A00866F7E /* RepeatTableViewController.swift */; };
 		080C30E427F70D1A00866F7E /* RepeatTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C30E327F70D1A00866F7E /* RepeatTableViewModel.swift */; };
 		0837A43827F62457009AD88A /* writeToFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0837A43727F62457009AD88A /* writeToFile.swift */; };
+		08E18B6A27F8E53A00111CD2 /* RingtoneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E18B6927F8E53A00111CD2 /* RingtoneTableViewController.swift */; };
+		08E18B6E27F8E55300111CD2 /* RingtoneTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E18B6D27F8E55300111CD2 /* RingtoneTableViewModel.swift */; };
 		08E34AA127F489670003FC1A /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E34AA027F489670003FC1A /* ClockViewModel.swift */; };
 		0B47C5CD27F89D4100E26AB1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B47C5CC27F89D4100E26AB1 /* AudioToolbox.framework */; };
 		0B47C5D127F89F5300E26AB1 /* bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0B47C5CF27F89F5200E26AB1 /* bell.mp3 */; };
@@ -42,6 +44,8 @@
 		080C30E027F70C1A00866F7E /* RepeatTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatTableViewController.swift; sourceTree = "<group>"; };
 		080C30E327F70D1A00866F7E /* RepeatTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatTableViewModel.swift; sourceTree = "<group>"; };
 		0837A43727F62457009AD88A /* writeToFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = writeToFile.swift; sourceTree = "<group>"; };
+		08E18B6927F8E53A00111CD2 /* RingtoneTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingtoneTableViewController.swift; sourceTree = "<group>"; };
+		08E18B6D27F8E55300111CD2 /* RingtoneTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingtoneTableViewModel.swift; sourceTree = "<group>"; };
 		08E34AA027F489670003FC1A /* ClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		0B47C5CA27F89D4100E26AB1 /* myClock.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = myClock.entitlements; sourceTree = "<group>"; };
 		0B47C5CC27F89D4100E26AB1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -94,6 +98,15 @@
 			path = RepeatDays;
 			sourceTree = "<group>";
 		};
+		08E18B6827F8E4F600111CD2 /* Ringtone */ = {
+			isa = PBXGroup;
+			children = (
+				08E18B6927F8E53A00111CD2 /* RingtoneTableViewController.swift */,
+				08E18B6D27F8E55300111CD2 /* RingtoneTableViewModel.swift */,
+			);
+			path = Ringtone;
+			sourceTree = "<group>";
+		};
 		08E34A9B27F488BB0003FC1A /* ClockDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +155,7 @@
 		BD3BF27027EB754100E28212 /* myClock */ = {
 			isa = PBXGroup;
 			children = (
+				08E18B6827F8E4F600111CD2 /* Ringtone */,
 				0B47C5CA27F89D4100E26AB1 /* myClock.entitlements */,
 				080C30DF27F70BDF00866F7E /* RepeatDays */,
 				0B5EBDED27F6DC9600577EC7 /* CalendarPicker */,
@@ -284,6 +298,7 @@
 				BD3BF29227EB9BB300E28212 /* Clock.swift in Sources */,
 				BD3BF27627EB754100E28212 /* StartViewController.swift in Sources */,
 				BD3BF27227EB754100E28212 /* AppDelegate.swift in Sources */,
+				08E18B6E27F8E55300111CD2 /* RingtoneTableViewModel.swift in Sources */,
 				0837A43827F62457009AD88A /* writeToFile.swift in Sources */,
 				BD3BF27427EB754100E28212 /* SceneDelegate.swift in Sources */,
 				0B5EBDF527F6DC9600577EC7 /* CalendarPickerViewController.swift in Sources */,
@@ -294,6 +309,7 @@
 				BD3BF29C27EB9D0500E28212 /* Array+Extension.swift in Sources */,
 				0B5EBDF327F6DC9600577EC7 /* CalendarPickerFooterView.swift in Sources */,
 				BD3BF28927EB77E900E28212 /* ClockCell.swift in Sources */,
+				08E18B6A27F8E53A00111CD2 /* RingtoneTableViewController.swift in Sources */,
 				0B5EBDF927F6DDBB00577EC7 /* Day.swift in Sources */,
 				BD1C881827EDBA8F005A8A58 /* UIStackView+Extension.swift in Sources */,
 				BD3BF29427EB9BB300E28212 /* DecodeHelper.swift in Sources */,

@@ -44,7 +44,13 @@ class RepeatTableViewController: UITableViewController {
         
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
-        self.present(alertController, animated: true)
+        
+        if (clocks[self.currentClockIndex].selectedDays != self.backupSelectedDays) {
+            self.present(alertController, animated: true)
+        }
+        else {
+            self.navigationController?.popViewController(animated: true)
+        }
 //        overrideAlertMessage()
 //        self.navigationController?.popViewController(animated: true)
     }
