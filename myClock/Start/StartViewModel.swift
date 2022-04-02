@@ -11,12 +11,8 @@ var clocks: [Clock] = []
 var subUrl: URL?
 
 class StartViewModel {
-    var fm = FileManager.default
-    var mainUrl: URL? = Bundle.main.url(forResource: "Clocks", withExtension: "json")
-
-//    var numberOfItems: Int {
-//        clocks?.count ?? 0
-//    }
+    let fm = FileManager.default
+    let mainUrl: URL? = Bundle.main.url(forResource: "Clocks", withExtension: "json")
 
     func itemAt(_ index: Int) -> Clock? {
         guard let item = clocks.safeRef(index) else { return nil }
@@ -24,26 +20,18 @@ class StartViewModel {
     }
 
     init() {
-//        clocks = DecodeHelper.load("Clocks.json")
         getData()
     }
 
-    func loadFile(mainPath: URL, subPath: URL){
+    private func loadFile(mainPath: URL, subPath: URL){
         if fm.fileExists(atPath: subPath.path){
             decodeData(pathName: subPath)
-
-            if clocks.isEmpty{
-                decodeData(pathName: mainPath)
-            }
-
         }else{
             decodeData(pathName: mainPath)
         }
-
-//        self.tableView.reloadData()
     }
 
-    func decodeData(pathName: URL){
+    private func decodeData(pathName: URL){
            do{
                let jsonData = try Data(contentsOf: pathName)
                let decoder = JSONDecoder()
@@ -51,10 +39,9 @@ class StartViewModel {
            } catch {}
        }
 
-//    guard let mainUrl = Bundle.main.url(forResource: "Clocks", withExtension: "json") else { return }
-
-    func getData() {
+    private func getData() {
         do {
+            print("json file gets read")
             let documentDirectory = try fm.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create:false)
             subUrl = documentDirectory.appendingPathComponent("Clocks.json")
             loadFile(mainPath: mainUrl!, subPath: subUrl!)

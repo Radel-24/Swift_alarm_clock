@@ -58,59 +58,9 @@ class RepeatTableViewController: UITableViewController {
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "dayCell")
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+//         self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-    
-//    private func setRingDays() {
-//        let indexClock = clocks.firstIndex(where: {$0.id == clockId})
-//        for day in days {
-//            for ringDay in clocks[indexClock!].ringDays {
-//                let dayForm = Calendar.current.dateComponents([.year, .month, .day], from: day.date)
-//                let ringDayForm = Calendar.current.dateComponents([.year, .month, .day], from: ringDay)
-//                if (dayForm == ringDayForm) {
-//                    let daysIndex = days.firstIndex(where: {$0.date == day.date})
-//                    days[daysIndex!].isSelected = true
-//                    print("ADDED")
-//                    break
-//                }
-//            }
-//        }
-//    }
-    
-    
-
-    
-    
-    // CONTINUE HERE !!!!!!!!!!!!
-//    private func setRingDays() {
-//
-//        let indexClock = clocks.firstIndex(where: {$0.id == clockId})
-//
-//        var tempRingDays: [String] = []
-//
-//        for element in clocks[indexClock!].ringDays {
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "dd.MM.yyyy"
-//            let day = dateFormatter.string(from: element)
-//            tempRingDays.append(day)
-//        }
-//
-//        for day in days {
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "dd.MM.yyyy"
-//            let formattedDay = dateFormatter.string(from: day.date)
-//
-//            if (tempRingDays.contains(formattedDay)) {
-//                let daysIndex = days.firstIndex(where: {$0.date == day.date})
-//                days[daysIndex!].isSelected = true
-//            }
-//        }
-//    }
-    
 
     // MARK: - Table view data source
 
@@ -147,15 +97,12 @@ class RepeatTableViewController: UITableViewController {
             cell!.accessoryType = .none
             clocks[currentClockIndex].selectedDays[indexPath.row] = false
         }
-        
         // Mark the newly selected filter item with a checkmark.
         else if (clocks[currentClockIndex].selectedDays[indexPath.row] == false) {
             let cell = tableView.cellForRow(at: indexPath)
             cell!.accessoryType = .checkmark
             clocks[currentClockIndex].selectedDays[indexPath.row] = true
         }
-        
-        writeToFile(location: subUrl!)
     }
     
     private func getRingDays() {
@@ -170,16 +117,14 @@ class RepeatTableViewController: UITableViewController {
     
     private func setRingDays() {
         let todaysIndex = Calendar.current.dateComponents([.weekday], from: Date.init()).weekday
+        let beginShift = 1 - todaysIndex!
+        let beginDate = Date.init().advanced(by: TimeInterval((beginShift * 3600 * 24)))
         
-        let begin = 1 - todaysIndex!
-        let beginDate = Date.init().advanced(by: TimeInterval((begin * 3600 * 24)))
-        
-        for index in 0...100 {
-            let checkIndex = index % 7
+        for index in 0...1000 {
+            let checkIndex = (index % 7) + 1
             let checkDate = toDateComponent(date: beginDate.advanced(by: TimeInterval((index * 3600 * 24))))
-            
 
-            if (weekdaysToActivate.contains(checkIndex + 1)) {
+            if (weekdaysToActivate.contains(checkIndex)) {
                 if (!clocks[currentClockIndex].ringDays.contains(checkDate)) {
                     clocks[currentClockIndex].ringDays.append(checkDate)
                 }
@@ -187,18 +132,20 @@ class RepeatTableViewController: UITableViewController {
         }
     }
     
-    var weekdaysToActivate: [Int]
+    private func removeClocksInPast() {
+        let today = Calendar.current.dateComponents([.year, .month, .day], from: Date.init())
+        for clock in clocks {
+            for date in clock.ringDays {
+                if (date < today){
+                    let indexClock = clocks.firstIndex(where: {$0.id == clock.id})
+                    let indexDate = clocks[indexClock!].ringDays.firstIndex(where: {$0 == date})
+                    clocks[indexClock!].ringDays.remove(at: indexDate!)
+                }
+            }
+        }
+    }
     
-//    private func overrideAlertMessage() {
-//        let alertController:UIAlertController = UIAlertController(title: "Override", message: "Settings will be overwritten", preferredStyle: UIAlertController.Style.alert)
-//
-//        alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.destructive, handler: { (action: UIAlertAction!) in
-//            clocks[self.currentClockIndex].ringDays = []
-//            self.setRingDays()
-//            }))
-//        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler:nil))
-//        present(alertController, animated: true, completion: nil)
-//    }
+    var weekdaysToActivate: [Int]
     
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -206,52 +153,8 @@ class RepeatTableViewController: UITableViewController {
         getRingDays()
         clocks[currentClockIndex].ringDays = []
         setRingDays()
-//        overrideAlertMessage()
+        removeClocksInPast()
         writeToFile(location: subUrl!)
     }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

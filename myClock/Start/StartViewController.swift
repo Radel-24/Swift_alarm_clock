@@ -41,7 +41,6 @@ class StartController: UIViewController {
 //        print("addTapped!");
 //        alertMessage()
         addClock()
-        writeToFile(location: subUrl!)
         collectionView.reloadData()
     }
     

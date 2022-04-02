@@ -69,7 +69,6 @@ class CalendarPickerViewController: UIViewController {
         }
         writeToFile(location: subUrl!)
     }
-    
 
   private lazy var headerView = CalendarPickerHeaderView (
     exitButtonTappedCompletionHandler: { [weak self] in
@@ -91,6 +90,7 @@ class CalendarPickerViewController: UIViewController {
       value: -1,
       to: self.baseDate
       ) ?? self.baseDate
+        self.reloadInputViews()
     },
     didTapNextMonthCompletionHandler: { [weak self] in
       guard let self = self else { return }
@@ -102,12 +102,13 @@ class CalendarPickerViewController: UIViewController {
         value: 1,
         to: self.baseDate
         ) ?? self.baseDate
-    })
+    },
+    datas: self)
 
   // MARK: Calendar Data Values
 
   private let selectedDate: Date
-  private var baseDate: Date {
+  var baseDate: Date {
     didSet {
       days = generateDaysInMonth(for: baseDate)
       collectionView.reloadData()
@@ -367,8 +368,6 @@ extension CalendarPickerViewController: UICollectionViewDataSource {
     let cell = collectionView.dequeueReusableCell(
       withReuseIdentifier: CalendarDateCollectionViewCell.reuseIdentifier,
       for: indexPath) as! CalendarDateCollectionViewCell
-    // swiftlint:disable:previous force_cast
-
     cell.day = day
     return cell
   }
@@ -387,8 +386,6 @@ extension CalendarPickerViewController: UICollectionViewDelegateFlowLayout {
         days[indexPath.row].isSelected = true
     }
     collectionView.reloadData()
-//    selectedDateChanged(day.date)
-//    dismiss(animated: true, completion: nil)
   }
 
   func collectionView(

@@ -110,7 +110,6 @@ class ClockController: UIViewController {
 
     func editNameSave() {
         let clockIndex = clocks.firstIndex(where: {$0.id == viewModel.clockId})
-            writeToFile(location: subUrl!)
             title = clocks[clockIndex!].name
             viewModel.collectionView.reloadData()
     }
@@ -127,7 +126,6 @@ class ClockController: UIViewController {
 
     func choseToDelete() {
         deleteClock()
-        writeToFile(location: subUrl!)
         viewModel.collectionView.reloadData()
         _ = navigationController?.popViewController(animated: true)
     }

@@ -57,7 +57,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 }
             }
         }
-        writeToFile(location: subUrl!)
     }
 
     private func setNextClocks() {
@@ -68,7 +67,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //                unscheduleClock(clockId: clock.id)
             }
         }
-        writeToFile(location: subUrl!)
     }
     
     private func registerLocal() {
@@ -130,7 +128,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         content.body = "get up now you lazy bastard!!!"
         content.categoryIdentifier = "myIdentifier"
         content.userInfo = ["Id": 7]
-        content.sound = UNNotificationSound.criticalSoundNamed(UNNotificationSoundName(rawValue: "tickle.mp3"))
+        content.sound = UNNotificationSound.criticalSoundNamed(UNNotificationSoundName(rawValue: "bell.mp3"))
 
         
         
@@ -150,7 +148,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         removeClocksInPast()
         unscheduleAllClocks()
         setNextClocks()
-        
+        writeToFile(location: subUrl!)
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.

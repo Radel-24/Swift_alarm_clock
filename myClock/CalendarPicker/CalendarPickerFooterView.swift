@@ -66,6 +66,8 @@ class CalendarPickerFooterView: UIView {
     button.titleLabel?.textColor = .label
 
     button.addTarget(self, action: #selector(didTapPreviousMonthButton), for: .touchUpInside)
+    button.isHidden = true
+    
     return button
   }()
 
@@ -96,13 +98,16 @@ class CalendarPickerFooterView: UIView {
 
   let didTapLastMonthCompletionHandler: (() -> Void)
   let didTapNextMonthCompletionHandler: (() -> Void)
+    let datas: CalendarPickerViewController
 
   init(
     didTapLastMonthCompletionHandler: @escaping (() -> Void),
-    didTapNextMonthCompletionHandler: @escaping (() -> Void)
+    didTapNextMonthCompletionHandler: @escaping (() -> Void),
+     datas: CalendarPickerViewController
   ) {
     self.didTapLastMonthCompletionHandler = didTapLastMonthCompletionHandler
     self.didTapNextMonthCompletionHandler = didTapNextMonthCompletionHandler
+    self.datas = datas
 
     super.init(frame: CGRect.zero)
 
@@ -153,9 +158,17 @@ class CalendarPickerFooterView: UIView {
 
   @objc func didTapPreviousMonthButton() {
     didTapLastMonthCompletionHandler()
+    if (datas.baseDate < Date.init()) { previousMonthButton.isHidden = true }
+    if (datas.baseDate < Date.init().advanced(by: (3600 * 24 * 35))) { nextMonthButton.isHidden = false }
   }
 
   @objc func didTapNextMonthButton() {
     didTapNextMonthCompletionHandler()
+    if (datas.baseDate > Date.init()) { previousMonthButton.isHidden = false }
+    if (datas.baseDate > Date.init().advanced(by: (3600 * 24 * 35))) { nextMonthButton.isHidden = true }
   }
+    
+    func disablePreviousButton() {
+        previousMonthButton.isEnabled = false
+    }
 }
