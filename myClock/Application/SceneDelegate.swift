@@ -130,7 +130,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         content.body = "get up now you lazy bastard!!!"
         content.categoryIdentifier = "myIdentifier"
         content.userInfo = ["Id": 7]
-        content.sound = UNNotificationSound.defaultCritical
+        content.sound = UNNotificationSound.criticalSoundNamed(UNNotificationSoundName(rawValue: "tickle.mp3"))
 
         
         
