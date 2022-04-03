@@ -34,13 +34,6 @@ class StartController: UIViewController {
 //        btnAdd.tintColor = .green
         navigationItem.rightBarButtonItem = btnAdd
         
-
-    
-    
-        
-//        let btnEdit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
-//        btnEdit.tintColor = .black
-//        navigationItem.leftBarButtonItem = btnEdit
     }
 
     @objc func addTapped(_ sender:UIViewController!) {
@@ -50,20 +43,10 @@ class StartController: UIViewController {
         collectionView.reloadData()
     }
     
-//    @objc func editTapped(_ sender:UIViewController!) {
-//        print("editTapped!");
-//    }
-    
-//    func alertMessage() {
-//        let alertController:UIAlertController = UIAlertController(title: "Added", message: "New Alarm", preferredStyle: UIAlertController.Style.alert)
-//        let alertAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:nil)
-//        alertController.addAction(alertAction)
-//        present(alertController, animated: true, completion: nil)
-//    }
     
     func addClock() {
         let newID = UUID.init()
-        clocks.append(myClock.Clock(id: newID, name: "New Alarm", daysOfWeek: [0], ringDays: [], isActivated: true, ringTime: Calendar.current.dateComponents([.hour, .minute], from: Date.init()), notificationId: UUID().uuidString, selectedDays: [false, false, false, false, false, false, false]))
+        clocks.append(myClock.Clock(id: newID, name: "New Alarm", daysOfWeek: [0], ringDays: [], isActivated: true, ringTime: Calendar.current.dateComponents([.hour, .minute], from: Date.init()), notificationId: UUID().uuidString, selectedDays: [false, false, false, false, false, false, false], selectedRingtone: [true, false, false, false]))
     }
     
     
@@ -88,16 +71,6 @@ class StartController: UIViewController {
 
 extension StartController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-//        let clock = clocks[indexPath.item]
-//        cells[indexPath.item].configureWith(clock)
-//        cells[indexPath.item].switchValueChanged = { switchValue in
-//            print("Switch is \(switchValue)")
-//            clocks[indexPath.item].isActivated = switchValue
-//            writeToFile(location: subUrl!)
-//        }
-//        return cells[indexPath.item]
-        
         guard
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClockCell", for: indexPath) as? ClockCell else { return UICollectionViewCell() }
         let clock = clocks[indexPath.item]
@@ -128,20 +101,6 @@ extension StartController: UICollectionViewDelegate, UICollectionViewDataSource,
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        guard
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClockCell", for: indexPath) as? ClockCell else { return CGSize() }
-//        if (clocks[indexPath.item].isActivated) {
-//            print("ON")
-//            cell.layer.borderColor = UIColor.white.cgColor
-//            cell.nameLabel.textColor = .white
-//        }
-//        else {
-//            print("OFF")
-//            cell.layer.borderColor = UIColor.darkGray.cgColor
-//            cell.nameLabel.textColor = .lightGray
-//        }
-//        cells.append(cell)
         return CGSize(width: collectionView.bounds.width - 32, height: 80)
-        
     }
 }

@@ -16,6 +16,7 @@ struct Clock: Codable, Identifiable, Hashable {
     var ringTime: DateComponents
     var notificationId: String
     var selectedDays: [Bool]
+    var selectedRingtone: [Bool]
 }
 
 

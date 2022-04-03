@@ -10,7 +10,20 @@ import UIKit
 class RingtoneTableViewController: UITableViewController {
     
     let viewModel = RingtoneTableViewModel()
+    let currentClockIndex: Int
 
+    
+    init(index: Int) {
+
+        self.currentClockIndex = index
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,6 +32,7 @@ class RingtoneTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ringtoneCell")
     }
 
     // MARK: - Table view data source
@@ -33,15 +47,40 @@ class RingtoneTableViewController: UITableViewController {
         return viewModel.ringtones.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ringtoneCell", for: indexPath)
 
         // Configure the cell...
-
+        cell.textLabel?.text = viewModel.ringtones[indexPath.row]
+        
+        if (clocks[currentClockIndex].selectedRingtone[indexPath.row] == true) {
+            cell.accessoryType = .checkmark
+        }
+        else {
+            cell.accessoryType = .none
+        }
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Unselect the row.
+        tableView.deselectRow(at: indexPath, animated: false)
+
+        for i in 0...clocks[currentClockIndex].selectedRingtone.count - 1 {
+            clocks[currentClockIndex].selectedRingtone[i] = false
+            let myIndexPath = IndexPath(row: i, section: 0)
+            let cell = tableView.cellForRow(at: myIndexPath)
+            cell!.accessoryType = .none
+        }
+        
+        clocks[currentClockIndex].selectedRingtone[indexPath.row] = true
+        let cell = tableView.cellForRow(at: indexPath)
+        cell!.accessoryType = .checkmark
+        
+        writeToFile(location: subUrl!)
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.

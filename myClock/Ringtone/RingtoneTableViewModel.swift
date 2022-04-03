@@ -10,5 +10,4 @@ import Foundation
 class RingtoneTableViewModel {
 
     var ringtones = ["abc", "hello", "hustensaft", "jungejunge"]
-    
 }
