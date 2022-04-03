@@ -37,8 +37,6 @@ class StartController: UIViewController {
     }
 
     @objc func addTapped(_ sender:UIViewController!) {
-//        print("addTapped!");
-//        alertMessage()
         addClock()
         collectionView.reloadData()
     }
