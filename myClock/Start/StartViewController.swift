@@ -46,7 +46,7 @@ class StartController: UIViewController {
     
     func addClock() {
         let newID = UUID.init()
-        clocks.append(myClock.Clock(id: newID, name: "New Alarm", daysOfWeek: [0], ringDays: [], isActivated: true, ringTime: Calendar.current.dateComponents([.hour, .minute], from: Date.init()), notificationId: UUID().uuidString, selectedDays: [false, false, false, false, false, false, false], selectedRingtone: [true, false, false, false]))
+        clocks.append(myClock.Clock(id: newID, name: "New Alarm", daysOfWeek: [0], ringDays: [], isActivated: true, ringTime: Calendar.current.dateComponents([.hour, .minute], from: Date.init()), notificationId: UUID().uuidString, selectedDays: [true, true, true, true, true, true, true], selectedRingtone: [true, false]))
     }
     
     

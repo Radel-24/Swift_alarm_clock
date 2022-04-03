@@ -74,8 +74,6 @@ class ClockController: UIViewController {
         return btn
     }()
 
-
-
     @objc func alertTextField(_ sender:UIButton!) {
         let alertController:UIAlertController = UIAlertController(title: "Edit Title", message: nil, preferredStyle: UIAlertController.Style.alert)
 
@@ -135,7 +133,6 @@ class ClockController: UIViewController {
     }
 
 
-
     private var currentIndex: Int?
 
     private let viewModel: ClockViewModel
@@ -148,6 +145,8 @@ class ClockController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -156,7 +155,7 @@ class ClockController: UIViewController {
         let index = clocks.firstIndex(of: element!)
         self.currentIndex = index!
         title = clocks[index!].name
-
+        
         setupView()
     }
 
@@ -205,7 +204,7 @@ class ClockController: UIViewController {
             timePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             timePicker.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 96),
 
-            editNameButton.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 96),
+            editNameButton.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 48),
             editNameButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
             editNameButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
 
@@ -221,7 +220,7 @@ class ClockController: UIViewController {
             ringtoneButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
             ringtoneButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
 
-            internDeleteButton.topAnchor.constraint(equalTo: ringtoneButton.bottomAnchor, constant: 96),
+            internDeleteButton.topAnchor.constraint(equalTo: ringtoneButton.bottomAnchor, constant: 48),
             internDeleteButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
             internDeleteButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16)
 

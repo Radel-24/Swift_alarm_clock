@@ -66,8 +66,11 @@ class RingtoneTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Unselect the row.
         tableView.deselectRow(at: indexPath, animated: false)
+        
+        print(clocks[currentClockIndex].selectedRingtone.count)
 
         for i in 0...clocks[currentClockIndex].selectedRingtone.count - 1 {
+            print("i: \(i)")
             clocks[currentClockIndex].selectedRingtone[i] = false
             let myIndexPath = IndexPath(row: i, section: 0)
             let cell = tableView.cellForRow(at: myIndexPath)

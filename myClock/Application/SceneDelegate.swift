@@ -128,10 +128,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         content.body = "get up now you lazy bastard!!!"
         content.categoryIdentifier = "myIdentifier"
         content.userInfo = ["Id": 7]
-        content.sound = UNNotificationSound.criticalSoundNamed(UNNotificationSoundName(rawValue: "bell.mp3"))
+        
+        if (clock.selectedRingtone[0] == true) {
+            content.sound = UNNotificationSound.criticalSoundNamed(UNNotificationSoundName(rawValue: "bell.mp3"))
+        }
+        else if (clock.selectedRingtone[1] == true) {
+            content.sound = UNNotificationSound.criticalSoundNamed(UNNotificationSoundName(rawValue: "tickle.mp3"))
+        }
+        
 
-        
-        
         clocks[clockIndex!].notificationId = UUID().uuidString
         
         let request = UNNotificationRequest(identifier: clock.notificationId, content: content, trigger: trigger)
