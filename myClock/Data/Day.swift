@@ -33,13 +33,8 @@
 import Foundation
 
 struct Day {
-    
-  // 1
   var date: Date
-  // 2
   var number: String
-  // 3
   var isSelected: Bool
-  // 4
   var isWithinDisplayedMonth: Bool
 }

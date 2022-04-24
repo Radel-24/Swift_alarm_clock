@@ -1,13 +1,16 @@
 //
-//  ViewController.swift
-//  techstack-swift
+//  StartViewController.swift
+//  myClock
 //
-//  Created by Marcus Hopp on 23.03.22.
+//  Created by Alexander Kurz on 3/28/22.
 //
 
 import UIKit
 
 class StartController: UIViewController {
+    
+    // MARK: Views
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -31,22 +34,8 @@ class StartController: UIViewController {
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         let btnAdd = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
-//        btnAdd.tintColor = .green
         navigationItem.rightBarButtonItem = btnAdd
-        
     }
-
-    @objc func addTapped(_ sender:UIViewController!) {
-        addClock()
-        collectionView.reloadData()
-    }
-    
-    
-    func addClock() {
-        let newID = UUID.init()
-        clocks.append(myClock.Clock(id: newID, name: "New Alarm", daysOfWeek: [0], ringDays: [], isActivated: true, ringTime: Calendar.current.dateComponents([.hour, .minute], from: Date.init()), notificationId: UUID().uuidString, selectedDays: [true, true, true, true, true, true, true], selectedRingtone: [true, false]))
-    }
-    
     
     private func setupCollectionView() {
         collectionView.register(ClockCell.self, forCellWithReuseIdentifier: "ClockCell")
@@ -65,7 +54,23 @@ class StartController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
+    // MARK: Button actions
+
+    @objc func addTapped(_ sender:UIViewController!) {
+        addClock()
+        collectionView.reloadData()
+    }
+    
+    // MARK: Functions
+    
+    private func addClock() {
+        let newID = UUID.init()
+        clocks.append(myClock.Clock(id: newID, name: "New Alarm", daysOfWeek: [0], ringDays: [], isActivated: true, ringTime: Calendar.current.dateComponents([.hour, .minute], from: Date.init()), notificationId: UUID().uuidString, selectedDays: [true, true, true, true, true, true, true], selectedRingtone: [true, false]))
+    }
 }
+
+// MARK: Collection view start controller
 
 extension StartController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -93,9 +98,7 @@ extension StartController: UICollectionViewDelegate, UICollectionViewDataSource,
         guard let clock = viewModel.itemAt(indexPath.item) else { return }
         let controller = ClockController(viewModel: ClockViewModel(clock: clock, collectionView: collectionView))
  
-        
         navigationController?.pushViewController(controller, animated: true)
-//        present(controller, animated: true, completion: nil)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

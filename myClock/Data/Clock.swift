@@ -1,8 +1,8 @@
 //
-//  Model.swift
-//  techstack
+//  Clock.swift
+//  myClock
 //
-//  Created by Marcus Hopp on 21.03.22.
+//  Created by Robin Adelwarth on 3/28/22.
 //
 
 import Foundation

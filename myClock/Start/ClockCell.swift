@@ -1,13 +1,69 @@
 //
-//  TechnologyCell.swift
-//  techstack-swift
+//  ClockCell.swift
+//  myClock
 //
-//  Created by Marcus Hopp on 23.03.22.
+//  Created by Alexander Kurz on 3/28/22.
 //
 
 import UIKit
 
 class ClockCell: UICollectionViewCell {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: Views
+    
+    private func setupView() {
+        switchView.addTarget(self, action: #selector(switchStateDidChange(_:)), for: .valueChanged)
+
+        layer.cornerRadius = 10
+        backgroundColor = .black
+        layer.borderWidth = 1
+    
+        addSubviews([
+            nameLabel,
+            chevronImageView,
+            switchView,
+        ])
+
+        NSLayoutConstraint.activate([
+            nameLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            nameLabel.rightAnchor.constraint(equalTo: switchView.leftAnchor),
+
+            chevronImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            chevronImageView.widthAnchor.constraint(equalToConstant: 10),
+            chevronImageView.heightAnchor.constraint(equalToConstant: 20),
+            chevronImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+
+            switchView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            switchView.rightAnchor.constraint(equalTo: chevronImageView.leftAnchor, constant: -16),
+        ])
+    }
+
+    func configureWith(_ clock: Clock, capableOfHidden: Bool = false, chevronHidden: Bool = false) {
+        nameLabel.text = clock.name
+        switchView.isOn = clock.isActivated
+        chevronImageView.isHidden = chevronHidden
+        if (switchView.isOn) {
+            layer.borderColor = UIColor.white.cgColor
+            nameLabel.textColor = .white
+        }
+        else {
+            layer.borderColor = UIColor.darkGray.cgColor
+            nameLabel.textColor = .lightGray
+        }
+    }
+    
+    // MARK: Cell elements
+
     let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -33,39 +89,8 @@ class ClockCell: UICollectionViewCell {
         return switchDemo
     }()
     
-//    private let deleteButton: UIButton = {
-//        let button = UIButton(type: .system)
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.setTitle("X", for: .normal)
-//        button.setTitleColor(.red, for: .normal)
-//        return button
-//    }()
+    // MARK: Button actions
     
-
-//    private var clockID : Int?
-    
-//    @objc func deleteAlarm(_ sender:UIButton)
-//    {
-//        print("deleteAlarm (doesnt do anything)")
-//        print("before deletion:")
-//        print(clocks.count)
-//        let toBeDeleted = clocks.first(where: {$0.id == clockID!}) ?? nil
-//        if (toBeDeleted != nil) {
-//            clocks.remove(at: clocks.firstIndex(of: toBeDeleted!)!)
-//        }
-//        print("\nafter deletion:")
-//        print(clocks.count)
-//        do {
-//            let encoder = JSONEncoder()
-//            encoder.outputFormatting = .prettyPrinted
-//            let JsonData = try encoder.encode(clocks)
-//            try JsonData.write(to: subUrl!)
-////            let viewController = StartController()
-//            super.StartController.reloaderrr()
-//        } catch {
-//            print("error: saveClocks failed")
-//        }
-//    }
     var switchValueChanged: ((Bool) -> ()) = { _ in }
 
     @objc func switchStateDidChange(_ sender:UISwitch!)
@@ -86,75 +111,6 @@ class ClockCell: UICollectionViewCell {
             nameLabel.textColor = .lightGray
             layer.borderColor = UIColor.darkGray.cgColor
         }
-//        print(defaults.bool(forKey: "Monday"))
-//        print(defaults.bool(forKey: "Tuesday"))
         switchValueChanged(sender.isOn)
-    }
-    
-
-    override init(frame: CGRect) {
-        
-        super.init(frame: frame)
-        
-        setupView()
-    
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-
-
-    private func setupView() {
-        switchView.addTarget(self, action: #selector(switchStateDidChange(_:)), for: .valueChanged)
-//        deleteButton.addTarget(self, action: #selector(deleteAlarm(_:)), for: .touchUpInside)
-        
-
-
-        layer.cornerRadius = 10
-        backgroundColor = .black
-        layer.borderWidth = 1
-    
-        
-
-        addSubviews([
-            nameLabel,
-            chevronImageView,
-            switchView,
-//            deleteButton
-        ])
-
-        NSLayoutConstraint.activate([
-            nameLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
-            nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            nameLabel.rightAnchor.constraint(equalTo: switchView.leftAnchor),
-
-            chevronImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
-            chevronImageView.widthAnchor.constraint(equalToConstant: 10),
-            chevronImageView.heightAnchor.constraint(equalToConstant: 20),
-            chevronImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-
-            switchView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            switchView.rightAnchor.constraint(equalTo: chevronImageView.leftAnchor, constant: -16),
-            
-//            deleteButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-//            deleteButton.rightAnchor.constraint(equalTo: switchView.leftAnchor, constant: -16)
-        ])
-    }
-
-    func configureWith(_ clock: Clock, capableOfHidden: Bool = false, chevronHidden: Bool = false) {
-        nameLabel.text = clock.name
-        switchView.isOn = clock.isActivated
-//        clockID = clock.id
-        chevronImageView.isHidden = chevronHidden
-        if (switchView.isOn) {
-            layer.borderColor = UIColor.white.cgColor
-            nameLabel.textColor = .white
-        }
-        else {
-            layer.borderColor = UIColor.darkGray.cgColor
-            nameLabel.textColor = .lightGray
-        }
     }
 }

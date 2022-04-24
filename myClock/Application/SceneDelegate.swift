@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  techstack-swift
+//  myClock
 //
-//  Created by Marcus Hopp on 23.03.22.
+//  Created by Alexander Kurz on 3/28/22.
 //
 
 import UIKit
@@ -11,7 +11,6 @@ import UserNotifications
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -46,25 +45,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to undo the changes made on entering the background.
     }
     
-    private func removeClocksInPast() {
-        let today = Calendar.current.dateComponents([.year, .month, .day], from: Date.init())
-        for clock in clocks {
-            for date in clock.ringDays {
-                if (date < today){
-                    let indexClock = clocks.firstIndex(where: {$0.id == clock.id})
-                    let indexDate = clocks[indexClock!].ringDays.firstIndex(where: {$0 == date})
-                    clocks[indexClock!].ringDays.remove(at: indexDate!)
-                }
-            }
-        }
-    }
+    // MARK: Functions
 
     private func setNextClocks() {
         for clock in clocks {
             if (clock.isActivated) {
                 scheduleClock(clockId: clock.id)
-            } else {
-//                unscheduleClock(clockId: clock.id)
             }
         }
     }
@@ -81,20 +67,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
     
-//    private func unscheduleClock(clockId: UUID) {
-//        let center = UNUserNotificationCenter.current()
-//        let clockIndex = clocks.firstIndex(where: {$0.id == clockId})
-//
-//        center.removePendingNotificationRequests(withIdentifiers: [clocks[clockIndex!].notificationId])
-//    }
-    
     private func unscheduleAllClocks() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
     
     private func findNextRingDate(ringDates: [DateComponents]) -> DateComponents {
-        
         var nextDate = ringDates[0]
         for date in ringDates {
             if (date < nextDate) {
@@ -107,17 +85,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func scheduleClock(clockId: UUID) {
-        
         let clockIndex = clocks.firstIndex(where: {$0.id == clockId})
         let clock = clocks[clockIndex!]
-        
         let center = UNUserNotificationCenter.current()
         
-//        center.removeDeliveredNotifications(withIdentifiers: [clock.notificationId])
-//        center.removePendingNotificationRequests(withIdentifiers: [clock.notificationId])
+
         if (clock.ringDays.isEmpty) { return }
         let nextDate = findNextRingDate(ringDates: clock.ringDays)
-        // TODO find next ring date an put it to ring date
         let ringDate = DateComponents(calendar: Calendar.current, year: nextDate.year, month: nextDate.month, day: nextDate.day, hour: clock.ringTime.hour, minute: clock.ringTime.minute)
         print(ringDate)
 
@@ -125,7 +99,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let content = UNMutableNotificationContent()
         content.title = clock.name
-        content.body = "get up now you lazy bastard!!!"
+        content.body = "get ready for a great new day"
         content.categoryIdentifier = "myIdentifier"
         content.userInfo = ["Id": 7]
         
@@ -136,17 +110,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             content.sound = UNNotificationSound.criticalSoundNamed(UNNotificationSoundName(rawValue: "tickle.mp3"))
         }
         
-
         clocks[clockIndex!].notificationId = UUID().uuidString
         
         let request = UNNotificationRequest(identifier: clock.notificationId, content: content, trigger: trigger)
         center.add(request)
-//        for index in 1...10 {
-//            UIScreen.main.brightness = CGFloat(Double(index) * 0.1)
-//            print(Double(index) * 0.1)
-//            sleep(1)
-//        }
-        
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
@@ -158,7 +125,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
 

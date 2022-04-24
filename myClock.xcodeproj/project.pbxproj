@@ -15,6 +15,7 @@
 		08E34AA127F489670003FC1A /* ClockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E34AA027F489670003FC1A /* ClockViewModel.swift */; };
 		0B1C7C5D27F8E585004A9CCE /* tickle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0B1C7C5C27F8E585004A9CCE /* tickle.mp3 */; };
 		0B1C7C6027F8E5AB004A9CCE /* bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0B1C7C5F27F8E5AB004A9CCE /* bell.mp3 */; };
+		0B21199528154D8A00A1D87A /* generalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B21199428154D8A00A1D87A /* generalFunctions.swift */; };
 		0B47C5CD27F89D4100E26AB1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B47C5CC27F89D4100E26AB1 /* AudioToolbox.framework */; };
 		0B4C005427F4CC3400421A92 /* ClockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4C005327F4CC3400421A92 /* ClockController.swift */; };
 		0B578BB127F85C480067C8E6 /* DateFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B578BB027F85C480067C8E6 /* DateFunctions.swift */; };
@@ -49,6 +50,7 @@
 		08E34AA027F489670003FC1A /* ClockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockViewModel.swift; sourceTree = "<group>"; };
 		0B1C7C5C27F8E585004A9CCE /* tickle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tickle.mp3; sourceTree = "<group>"; };
 		0B1C7C5F27F8E5AB004A9CCE /* bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bell.mp3; sourceTree = "<group>"; };
+		0B21199428154D8A00A1D87A /* generalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = generalFunctions.swift; sourceTree = "<group>"; };
 		0B47C5CA27F89D4100E26AB1 /* myClock.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = myClock.entitlements; sourceTree = "<group>"; };
 		0B47C5CC27F89D4100E26AB1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0B4C005327F4CC3400421A92 /* ClockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockController.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				BD1C882027EDCFDB005A8A58 /* UIColor+Extension.swift */,
 				0837A43727F62457009AD88A /* writeToFile.swift */,
 				0B578BB027F85C480067C8E6 /* DateFunctions.swift */,
+				0B21199428154D8A00A1D87A /* generalFunctions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				08E18B6E27F8E55300111CD2 /* RingtoneTableViewModel.swift in Sources */,
 				0837A43827F62457009AD88A /* writeToFile.swift in Sources */,
 				BD3BF27427EB754100E28212 /* SceneDelegate.swift in Sources */,
+				0B21199528154D8A00A1D87A /* generalFunctions.swift in Sources */,
 				0B5EBDF527F6DC9600577EC7 /* CalendarPickerViewController.swift in Sources */,
 				0B578BB127F85C480067C8E6 /* DateFunctions.swift in Sources */,
 				BD1C882127EDCFDB005A8A58 /* UIColor+Extension.swift in Sources */,

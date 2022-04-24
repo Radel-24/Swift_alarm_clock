@@ -12,6 +12,7 @@ class RepeatTableViewController: UITableViewController {
     let viewModel = RepeatTableViewModel()
     let currentClockIndex: Int
     let backupSelectedDays: [Bool]
+    var weekdaysToActivate: [Int]
 
     init(index: Int) {
 
@@ -23,6 +24,17 @@ class RepeatTableViewController: UITableViewController {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.done, target: self, action: #selector(self.backAction(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
+
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "dayCell")
     }
 
     @objc func backAction(sender: UIBarButtonItem) {
@@ -51,35 +63,10 @@ class RepeatTableViewController: UITableViewController {
         else {
             self.navigationController?.popViewController(animated: true)
         }
-//        overrideAlertMessage()
-//        self.navigationController?.popViewController(animated: true)
+        removeClocksInPast()
     }
 
-
-
-//    @objc func back(sender: UIBarButtonItem) {
-//
-//        getRingDays()
-//        setRingDays()
-//        writeToFile(location: subUrl!)
-//        overrideAlertMessage()
-////        _ = navigationController?.popViewController(animated: true)
-//    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.done, target: self, action: #selector(self.backAction(sender:)))
-        self.navigationItem.leftBarButtonItem = newBackButton
-
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "dayCell")
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-//         self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
-
-    // MARK: - Table view data source
+    // MARK: - Table view
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -108,8 +95,6 @@ class RepeatTableViewController: UITableViewController {
         // Unselect the row.
         tableView.deselectRow(at: indexPath, animated: false)
 
-
-
         // remove the checkmark
         if (clocks[currentClockIndex].selectedDays[indexPath.row] == true) {
             let cell = tableView.cellForRow(at: indexPath)
@@ -123,6 +108,8 @@ class RepeatTableViewController: UITableViewController {
             clocks[currentClockIndex].selectedDays[indexPath.row] = true
         }
     }
+    
+    // MARK: Functions
 
     private func getRingDays() {
         var i = 1
@@ -150,30 +137,4 @@ class RepeatTableViewController: UITableViewController {
             }
         }
     }
-
-    private func removeClocksInPast() {
-        let today = Calendar.current.dateComponents([.year, .month, .day], from: Date.init())
-        for clock in clocks {
-            for date in clock.ringDays {
-                if (date < today){
-                    let indexClock = clocks.firstIndex(where: {$0.id == clock.id})
-                    let indexDate = clocks[indexClock!].ringDays.firstIndex(where: {$0 == date})
-                    clocks[indexClock!].ringDays.remove(at: indexDate!)
-                }
-            }
-        }
-    }
-
-    var weekdaysToActivate: [Int]
-
-
-    override func viewWillDisappear(_ animated: Bool) {
-
-        getRingDays()
-        clocks[currentClockIndex].ringDays = []
-        setRingDays()
-        removeClocksInPast()
-        writeToFile(location: subUrl!)
-    }
-
 }

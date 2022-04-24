@@ -1,11 +1,13 @@
 //
 //  StartViewModel.swift
-//  techstack-swift
+//  myClock
 //
-//  Created by Marcus Hopp on 23.03.22.
+//  Created by Alexander Kurz on 3/28/22.
 //
 
 import Foundation
+
+// MARK: Global variables
 
 var clocks: [Clock] = []
 var subUrl: URL?
@@ -15,13 +17,15 @@ class StartViewModel {
     let fm = FileManager.default
     let mainUrl: URL? = Bundle.main.url(forResource: "Clocks", withExtension: "json")
 
+    init() {
+        getData()
+    }
+    
+    // MARK: Functions
+    
     func itemAt(_ index: Int) -> Clock? {
         guard let item = clocks.safeRef(index) else { return nil }
         return item
-    }
-
-    init() {
-        getData()
     }
 
     private func loadFile(mainPath: URL, subPath: URL){
@@ -50,7 +54,6 @@ class StartViewModel {
             print(error)
         }
     }
-
 }
 
 
