@@ -67,6 +67,15 @@ class StartController: UIViewController {
     private func addClock() {
         let newID = UUID.init()
         clocks.append(myClock.Clock(id: newID, name: "New Alarm", daysOfWeek: [0], ringDays: [], isActivated: true, ringTime: Calendar.current.dateComponents([.hour, .minute], from: Date.init()), notificationId: UUID().uuidString, selectedDays: [true, true, true, true, true, true, true], selectedRingtone: [true, false]))
+        let element = clocks.first(where: {$0.id == newID})
+        let index = clocks.firstIndex(of: element!)
+        let currentClockIndex = index!
+        var weekdaysToActivate: [Int] = []
+        for i:Int in 1...7 {
+            weekdaysToActivate.append(i)
+        }
+        setRingDays(currentClockIndex:currentClockIndex, weekdaysToActivate:weekdaysToActivate)
+        writeToFile(location: subUrl!)
     }
 }
 
@@ -79,7 +88,6 @@ extension StartController: UICollectionViewDelegate, UICollectionViewDataSource,
         let clock = clocks[indexPath.item]
         cell.configureWith(clock)
         cell.switchValueChanged = { switchValue in
-            print("Switch is \(switchValue)")
             clocks[indexPath.item].isActivated = switchValue
             writeToFile(location: subUrl!)
         }

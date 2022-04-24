@@ -18,5 +18,3 @@ struct Clock: Codable, Identifiable, Hashable {
     var selectedDays: [Bool]
     var selectedRingtone: [Bool]
 }
-
-

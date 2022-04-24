@@ -43,7 +43,7 @@ class RepeatTableViewController: UITableViewController {
         let okAction = UIAlertAction(title: "Ok", style: .default) { (result : UIAlertAction) -> Void in
             self.getRingDays()
             clocks[self.currentClockIndex].ringDays = []
-            self.setRingDays()
+            setRingDays(currentClockIndex:self.currentClockIndex, weekdaysToActivate:self.weekdaysToActivate)
             writeToFile(location: subUrl!)
             self.navigationController?.popViewController(animated: true)
         }
@@ -118,23 +118,6 @@ class RepeatTableViewController: UITableViewController {
                 weekdaysToActivate.append(i)
             }
             i += 1
-        }
-    }
-
-    private func setRingDays() {
-        let todaysIndex = Calendar.current.dateComponents([.weekday], from: Date.init()).weekday
-        let beginShift = 1 - todaysIndex!
-        let beginDate = Date.init().advanced(by: TimeInterval((beginShift * 3600 * 24)))
-
-        for index in 0...1000 {
-            let checkIndex = (index % 7) + 1
-            let checkDate = toDateComponent(date: beginDate.advanced(by: TimeInterval((index * 3600 * 24))))
-
-            if (weekdaysToActivate.contains(checkIndex)) {
-                if (!clocks[currentClockIndex].ringDays.contains(checkDate)) {
-                    clocks[currentClockIndex].ringDays.append(checkDate)
-                }
-            }
         }
     }
 }
