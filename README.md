@@ -2,6 +2,10 @@
 * This is an alarm clock app, where you can schedule your alarms in a calendar view.  
 * This grants that you don't have to think about stopping your alarms for holidays and reschedule them afterwards.
 
+## Contributors
+[42 Heilbronn](https://www.42heilbronn.de/en/) students:
+[Robin](https://github.com/Radel-24), [Alex](https://github.com/42akurz)
+
 ## Add a new alarm
 * Set alarm name
 * Set alarm clock
