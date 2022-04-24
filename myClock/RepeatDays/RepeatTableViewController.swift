@@ -12,12 +12,10 @@ class RepeatTableViewController: UITableViewController {
     let viewModel = RepeatTableViewModel()
     let currentClockIndex: Int
     let backupSelectedDays: [Bool]
-    var weekdaysToActivate: [Int]
 
     init(index: Int) {
 
         self.currentClockIndex = index
-        self.weekdaysToActivate = []
         self.backupSelectedDays = clocks[currentClockIndex].selectedDays
         super.init(nibName: nil, bundle: nil)
     }
@@ -41,7 +39,6 @@ class RepeatTableViewController: UITableViewController {
 
         let alertController = UIAlertController(title: "Are You Sure?", message: "If You Proceed, The Calendar data will be overriden", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default) { (result : UIAlertAction) -> Void in
-            self.getRingDays()
             clocks[self.currentClockIndex].ringDays = []
             setRingDays(currentClockIndex:self.currentClockIndex)
             writeToFile(location: subUrl!)
@@ -106,18 +103,6 @@ class RepeatTableViewController: UITableViewController {
             let cell = tableView.cellForRow(at: indexPath)
             cell!.accessoryType = .checkmark
             clocks[currentClockIndex].selectedDays[indexPath.row] = true
-        }
-    }
-    
-    // MARK: Functions
-
-    private func getRingDays() {
-        var i = 1
-        for state in clocks[currentClockIndex].selectedDays {
-            if (state == true) {
-                weekdaysToActivate.append(i)
-            }
-            i += 1
         }
     }
 }
