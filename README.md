@@ -24,10 +24,11 @@ This grants that you don't have to think about stopping your alarms for holidays
 ## Switch Alarm on / off
 <img src="images/on_off.gif" alt="gif" width="200"/>
 
-## Delete Alarm
+## Delete alarm
 <img src="images/delete.gif" alt="gif" width="200"/>
 
 ## Alarm notification
+<p align="left">
 <img src="images/home_screen.gif" alt="gif" width="200"/>
 <img src="images/lock_screen.gif" alt="gif" width="200"/>
-
+</p>
