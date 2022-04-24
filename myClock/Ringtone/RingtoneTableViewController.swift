@@ -59,6 +59,7 @@ class RingtoneTableViewController: UITableViewController {
         
         print(clocks[currentClockIndex].selectedRingtone.count)
 
+        // unselect the previous selected ringtone and remove checkmark
         for i in 0...clocks[currentClockIndex].selectedRingtone.count - 1 {
             print("i: \(i)")
             clocks[currentClockIndex].selectedRingtone[i] = false
@@ -67,6 +68,7 @@ class RingtoneTableViewController: UITableViewController {
             cell!.accessoryType = .none
         }
         
+        // set the selected ringtone as active and add checkmark
         clocks[currentClockIndex].selectedRingtone[indexPath.row] = true
         let cell = tableView.cellForRow(at: indexPath)
         cell!.accessoryType = .checkmark

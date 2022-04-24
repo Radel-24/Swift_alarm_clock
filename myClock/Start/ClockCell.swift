@@ -84,7 +84,7 @@ class ClockCell: UICollectionViewCell {
 
     let switchView: UISwitch = {
         let switchDemo = UISwitch()
-        switchDemo.translatesAutoresizingMaskIntoConstraints = false // um view selbst zu positieren
+        switchDemo.translatesAutoresizingMaskIntoConstraints = false
         switchDemo.setOn(false, animated: true)
         return switchDemo
     }()
