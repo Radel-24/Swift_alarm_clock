@@ -43,7 +43,7 @@ class RepeatTableViewController: UITableViewController {
         let okAction = UIAlertAction(title: "Ok", style: .default) { (result : UIAlertAction) -> Void in
             self.getRingDays()
             clocks[self.currentClockIndex].ringDays = []
-            setRingDays(currentClockIndex:self.currentClockIndex, weekdaysToActivate:self.weekdaysToActivate)
+            setRingDays(currentClockIndex:self.currentClockIndex)
             writeToFile(location: subUrl!)
             self.navigationController?.popViewController(animated: true)
         }

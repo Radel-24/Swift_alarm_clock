@@ -70,11 +70,7 @@ class StartController: UIViewController {
         let element = clocks.first(where: {$0.id == newID})
         let index = clocks.firstIndex(of: element!)
         let currentClockIndex = index!
-        var weekdaysToActivate: [Int] = []
-        for i:Int in 1...7 {
-            weekdaysToActivate.append(i)
-        }
-        setRingDays(currentClockIndex:currentClockIndex, weekdaysToActivate:weekdaysToActivate)
+        setRingDays(currentClockIndex:currentClockIndex)
         writeToFile(location: subUrl!)
     }
 }
