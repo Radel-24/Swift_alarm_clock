@@ -5,6 +5,17 @@ This is an alarm clock app, where you can schedule your alarms in a calendar vie
 <img src="images/clockDetails.png" alt="J" width="200"/>
 <img src="images/calendarView.png" alt="J" width="200"/>
 
-<img src="images/home_screen.gif" alt="notification" width="200"/>
-<img src="images/lock_screen.gif" alt="notification" width="200"/>
 
+
+# gifs
+
+<img src="images/work_name_time.gif" alt="gif" width="200"/>
+<img src="images/work_repeat_days.gif" alt="gif" width="200"/>
+<img src="images/work_calendar.gif" alt="gif" width="200"/>
+<img src="images/work_ringtone.gif" alt="gif" width="200"/>
+
+<img src="images/on_off.gif" alt="gif" width="200"/>
+<img src="images/delete.gif" alt="gif" width="200"/>
+
+<img src="images/home_screen.gif" alt="gif" width="200"/>
+<img src="images/lock_screen.gif" alt="gif" width="200"/>
