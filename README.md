@@ -4,3 +4,7 @@ This is an alarm clock app, where you can schedule your alarms in a calendar vie
 <img src="images/firstScreen.png" alt="J" width="200"/>
 <img src="images/clockDetails.png" alt="J" width="200"/>
 <img src="images/calendarView.png" alt="J" width="200"/>
+
+<img src="images/home_screen.gif" alt="notification" width="200"/>
+<img src="images/lock_screen.gif" alt="notification" width="200"/>
+
