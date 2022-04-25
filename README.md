@@ -31,7 +31,7 @@
 ## Delete alarm
 <img src="images/delete.gif" alt="gif" width="200"/>
 
-## Alarm notification
+## Alarm notification with ringtone
 <p align="left">
 <img src="images/home_screen.gif" alt="gif" width="200"/>
 <img src="images/lock_screen.gif" alt="gif" width="200"/>
